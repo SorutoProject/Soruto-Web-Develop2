@@ -8,6 +8,9 @@
 myCodeMirror.on("keyup", function (cm, event) {
         view();
     });
+myCodeMirror.on("mousedown", function (cm, event) {
+        cMenu();
+    });
 window.onload = function(){
 	var arg = new Object;
 	var pair=location.search.substring(1).split('&');
@@ -228,4 +231,5 @@ function Screen(){
 }
 function changeLang(l){
 		myCodeMirror.setOption("mode" , l);
+		cMenu();
 }
