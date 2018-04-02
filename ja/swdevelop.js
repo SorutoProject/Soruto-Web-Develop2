@@ -1,8 +1,24 @@
-﻿var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"),{
+﻿var mixedMode = {
+        name: "htmlmixed",
+        scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
+                       mode: null},
+                      {matches: /(text|application)\/(x-)?vb(a|script)/i,
+                       mode: "vbscript"}]
+};
+var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"),{
     lineNumbers: true,
-    matchBrackets: true,
-    mode: "xml",
+    mode: "htmlmixed",
 	theme: "monokai",
+    extraKeys: {
+    "F11": function(cm) {
+    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
+    },
+    "Esc": function(cm) {
+     if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
+    },
+     "Ctrl-F": "findPersistent",
+     "Ctrl-Space": "autocomplete"
+    }
 
 });
 myCodeMirror.on("keyup", function (cm, event) {
@@ -30,6 +46,7 @@ iframe.contentDocument.body.contentEditable = true;
 iframe.contentDocument.designMode = 'on';
 */
 document.getElementById("submenu").style.display = "none";
+document.getElementById("loader").style.display = "none";
 }
 window.onresize = function () {
     Screen();
@@ -84,10 +101,10 @@ function menu(num){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==3){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'xml\')" class="submenulink">HTML(XML)</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\')" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\')" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\')" class="submenulink">PHP</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\')" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\')" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\')" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\')" class="submenulink">PHP</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==4){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'About\',\'<b>Soruto Web Develop</b><br><span style=font-size:10pt>Webブラウザで使えるオンラインIDE<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'About\',\'<b>Soruto Web Develop</b><br><span style=font-size:10pt>Webブラウザで使えるオンラインIDE<br>Made with CodeMirror.<br>SourceCodeProフォントを使用しています。<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 }
 function sMenu(){
