@@ -55,7 +55,7 @@ function viewMode(num){
 		view();
 	}else if(num==1){
 		so.getId("code").style.width = "99.5%";
-		document.getElementsByClassName("CodeMirror")[0].style.width = "99.5%";
+		document.getElementsByClassName("CodeMirror")[0].style.width = "100%";
 		so.displayNone("view");
 		so.display("code");
 	}
