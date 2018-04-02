@@ -119,8 +119,8 @@ input[type="text"]:hover,input[type="text"]:focus,input[type="button"]:hover,inp
 	right:20px;
 }
 @font-face {
- font-family:SourceHanCodeJP-Normal;
- src:url(../SourceHanCodeJP-Normal.otf);
+ font-family:SourceCodePro;
+ src:url(../SourceCodeVariable-Roman.ttf);
 }
 .CodeMirror{
 	position:absolute !important;
