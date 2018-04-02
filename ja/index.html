@@ -1,0 +1,15 @@
+<!DOCTYPE HTML><html><head><title>Soruto Web Develop</title><meta charset="utf-8">
+</head>
+<body><link rel="stylesheet" href="swdevelop-style.css"><link rel="shortcut icon" href="../soruto-web-develop.ico">
+<div id="menu"><a href="javascript:void(0);" onclick="sMenu();" onmouseover="menu(0);" class="menulink">&nbsp;ファイル&nbsp;</a> <a href="javascript:void(0);" onclick="sMenu();" onmouseover="menu(1);" class="menulink">&nbsp;新しいタブ&nbsp;</a> <a href="javascript:void(0);" onclick="sMenu();" onmouseover="menu(2);" class="menulink">&nbsp;表示&nbsp;</a> <a href="javascript:void(0);" onclick="sMenu();" onmouseover="menu(3);" class="menulink">&nbsp;テンプレート&nbsp;</a> <a href="javascript:void(0);" onmouseover="menu(4)" onclick="sMenu();" class="menulink">&nbsp;About&nbsp;</a> <a href="../en/" class="menulink">&nbsp;English&nbsp;</a></div><div id="submenu"></div>
+<textarea id="code" onkeyup="view();" spellcheck="false" onclick="cMenu();" placeholder="コードを入力..."></textarea><iframe id="view" onclick="cMenu();"></iframe><!--<div id="change"><a href="javascript:void(0);" onclick="edit();" class="menulink">&nbsp;変更を適用&nbsp;</a></div>--><div id="states"></div><div id="so-modal"></div><link rel="stylesheet" href="../lib/codemirror.css"><link rel="stylesheet" href="../theme/monokai.css">
+<script src="../lib/codemirror.js"></script>
+<script src="../mode/javascript.js"></script>
+<script src="../mode/css.js"></script>
+<script src="../mode/xml.js"></script>
+<script src="../mode/htmlmixed.js"></script>
+<script src="../mode/php.js"></script>
+
+<script src="swdevelop.js"></script>
+<script src="soruto_ejb-min.js"></script>
+</body></html>
