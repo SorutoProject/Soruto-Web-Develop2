@@ -10,12 +10,6 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"),{
     mode: "htmlmixed",
 	theme: "monokai",
     extraKeys: {
-    "F11": function(cm) {
-    cm.setOption("fullScreen", !cm.getOption("fullScreen"));
-    },
-    "Esc": function(cm) {
-     if (cm.getOption("fullScreen")) cm.setOption("fullScreen", false);
-    },
      "Ctrl-F": "findPersistent",
      "Ctrl-Space": "autocomplete"
     }
