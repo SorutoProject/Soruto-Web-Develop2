@@ -254,7 +254,7 @@ function changeLang(l,v){
 		cMenu();
 }
 function showConfig(){
-	var screen = '<div style="position:absolute;top:0px;left:0px;background:#fefefe;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();">&nbsp;<input type="button" value="キャンセル" onclick="so.modal.close();"></div><br><span style="font-size:8pt;">※ <b>*</b>のついている設定は次回アクセス時に有効になります</span><br><b>自動改行の設定</b><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label><br><b>フォントの設定*</b><br>フォント名<br><input type="text" id="configFontFamily" style="width:270px;" placeholder="フォント名(例:メイリオ)"><br>フォントサイズ<br><input type="number" id="configFontSize" style="width:100px;">pt';
+	var screen = '<div style="position:absolute;top:0px;left:0px;background:#fefefe;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();">&nbsp;<input type="button" value="キャンセル" onclick="so.modal.close();"></div><br><span style="font-size:8pt;">※ <b>*</b>のついている設定は次回アクセス時に有効になります</span><hr color="#c4c4c4"><b>自動改行の設定</b><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label><hr color="#c4c4c4"><b>フォントの設定*</b><br>フォント名<br><input type="text" id="configFontFamily" style="width:270px;" placeholder="フォント名(例:メイリオ)"><br>フォントサイズ<br><input type="number" id="configFontSize" style="width:100px;">pt';
 	so.modal.custom(screen);
 	var nowconfig = localStorage.swdConfig.split(',');
 	if(nowconfig[0] == "true"){autowrapdata = true;}
