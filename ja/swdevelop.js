@@ -10,6 +10,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"),{
     mode: "htmlmixed",
 	theme: "monokai",
 	lineWrapping: true,
+	autoCloseTags: true,
     extraKeys: {
      "Ctrl-F": "findPersistent",
      "Ctrl-Space": "autocomplete"
@@ -40,8 +41,7 @@ window.onload = function(){
 iframe.contentDocument.body.contentEditable = true;
 iframe.contentDocument.designMode = 'on';
 */
-document.getElementById("submenu").style.display = "none";
-document.getElementById("loader").style.display = "none";
+//設定の適用
 var config = localStorage.swdConfig.split(',');
 	if(config[0] == "true"){autowrapdata = true;}
 	else{autowrapdata=false;}
@@ -49,7 +49,11 @@ myCodeMirror.setOption("lineWrapping",autowrapdata);
 var editorMain = document.getElementsByClassName('CodeMirror')[0];
 editorMain.style.fontFamily = config[1];
 editorMain.style.fontSize = config[2] + "pt";
+//スタートセンターの起動
+showStartCenter();
 
+document.getElementById("submenu").style.display = "none";
+document.getElementById("loader").style.display = "none";
 }
 window.onresize = function () {
     Screen();
@@ -88,7 +92,7 @@ function viewMode(num){
 }
 function menu(num){
 	var sub = document.getElementById("submenu");
-	//メニュー設定
+	//メニュー設定(class="submenulink"を指定したaタグはwidth:100%なので、<br>不要)
 	if(num==0){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="newFile();" class="submenulink">新規作成</a><input type="text" id="filename" style="width:295px;background:#4c4c4c;color:#fefefe;" placeholder="ファイル名..." autocomplete="off" onkeyup="savefilename();"><br><a href="javascript:void(0);" onclick="fileDown();" class="submenulink">ダウンロード</a><a href="javascript:void(0);" onclick="fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0);" onclick="saveLocal();" class="submenulink">ブラウザ(LocalStorage)に保存</a><a href="javascript:void(0);" onclick="loadLocal();" class="submenulink">ブラウザ(LocalStorage)から読み込み</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 		var filename = sessionStorage.filename;
@@ -101,10 +105,10 @@ function menu(num){
 		sub.innerHTML='<a href="javascript:void(0)" onclick="newtab(0)" class="submenulink">新しいタブを開く</a><a href="javascript:void(0)" onclick="newtab(1)" class="submenulink">新しいタブでファイルを開く</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==2){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0)" class="submenulink" onclick="showConfig();">設定</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0)" class="submenulink" onclick="showStartCenter();cMenu();">スタートセンターを開く</a><a href="javascript:void(0)" class="submenulink" onclick="showConfig();"><b>設定を開く</b></a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==3){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink">PHP</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\')" class="submenulink">XML</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==4){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'About\',\'<b>Soruto Web Develop</b><br><span style=font-size:10pt>Webブラウザで使えるオンラインIDE<br>Made with CodeMirror.<br>SourceCodeProフォントを使用しています。<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
@@ -162,7 +166,7 @@ cMenu();
 }
 function fileOpen(){
 cMenu();
-var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。</span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css"><br><br><input type="button" onclick="so.modal.close();" value="キャンセル">';
+var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。</span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css"><br><br><input type="button" onclick="so.modal.close();" value="閉じる">';
 so.modal.custom(diaso);
 var fo = document.getElementById("selfile");
 fo.addEventListener("change",function(evt){
@@ -193,21 +197,27 @@ fo.addEventListener("change",function(evt){
 },false);
 }
 function saveLocal(){
-	localStorage.savedata = so.getVal("code");
+	localStorage.savedata = myCodeMirror.getValue();
 	cMenu();
 	so.modal.al("完了","LocalStorageに上書き保存しました");
 }
 function loadLocal(){
-	so.setVal("code",localStorage.savedata);
+	try{
+	myCodeMirror.setValue(localStorage.savedata);
 	cMenu();
 	view();
+	}catch(e){
+		localStorage.savedata = "";
+	}
 }
 function newFile(){
 	cMenu();
-	if(confirm("新しいファイルを作成すると、現在の編集データが消えますがよろしいですか？")){
+	if(myCodeMirror.getValue()!=""){
+		if(confirm("エディタに編集内容が残っています。\n新規作成すると削除されますがよろしいですか?")){
 		myCodeMirror.setValue("");
 		document.title="New - Soruto Web Develop";
 		view();
+		}
 	}
 }
 function cMenu(){
@@ -254,7 +264,7 @@ function changeLang(l,v){
 		cMenu();
 }
 function showConfig(){
-	var screen = '<div style="position:absolute;top:0px;left:0px;background:#fefefe;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();">&nbsp;<input type="button" value="キャンセル" onclick="so.modal.close();"></div><br><span style="font-size:8pt;">※ <b>*</b>のついている設定は次回アクセス時に有効になります</span><hr color="#c4c4c4"><b>自動改行の設定</b><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label><hr color="#c4c4c4"><b>フォントの設定*</b><br>フォント名<br><input type="text" id="configFontFamily" style="width:270px;" placeholder="フォント名(例:メイリオ)"><br>フォントサイズ<br><input type="number" id="configFontSize" style="width:100px;">pt';
+	var screen = '<div style="position:absolute;top:0px;left:0px;background:#fefefe;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();">&nbsp;<input type="button" value="保存せず閉じる" onclick="so.modal.close();"></div><br><span style="font-size:8pt;">※ <b>*</b>のついている設定は次回アクセス時に有効になります</span><hr color="#c4c4c4"><b>自動改行の設定</b><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label><hr color="#c4c4c4"><b>フォントの設定*</b><br>フォント名<br><input type="text" id="configFontFamily" style="width:270px;" placeholder="フォント名(例:メイリオ)"><br>フォントサイズ<br><input type="number" id="configFontSize" style="width:100px;">pt';
 	so.modal.custom(screen);
 	var nowconfig = localStorage.swdConfig.split(',');
 	if(nowconfig[0] == "true"){autowrapdata = true;}
@@ -270,5 +280,13 @@ function saveConfig(){
 	var configfontsize = document.getElementById('configFontSize').value;
 	localStorage.swdConfig = configwrap + "," + configfontfamily + "," + configfontsize;
 	myCodeMirror.setOption("lineWrapping",configwrap);
+	var editorMain = document.getElementsByClassName('CodeMirror')[0];
+	editorMain.style.fontFamily = configfontfamily;
+	editorMain.style.fontSize = configfontsize + "pt";
 	so.modal.close();
+}
+function showStartCenter(){
+	var startmenu = '<b>SWD</b> スタートセンター<a href="javascript:void(0)" onclick="so.modal.close();newFile()" class="submenulink">新規作成</a><a href="javascript:void(0)" onclick="so.modal.close();fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0)" onclick="so.modal.close();loadLocal();" class="submenulink" >LocalStorageから読み込む</a><a href="javascript:void(0)" onclick="so.modal.close();showConfig()" class="submenulink" style="border-bottom:#a5a5a5 3px solid;">設定を開く</a><a href="javascript:void(0)" onclick="so.modal.close();" class="submenulink">スタートセンターを閉じる</a>';
+
+	so.modal.custom(startmenu);
 }
