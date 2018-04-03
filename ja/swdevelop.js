@@ -33,6 +33,9 @@ window.onload = function(){
 	var param = arg.f;
 	if(param == "new"){
 		fileOpen();
+	}else{
+	//スタートセンターの起動
+	showStartCenter();
 	}
 	view();
 	Screen();
@@ -51,8 +54,6 @@ var editorMain = document.getElementsByClassName('CodeMirror')[0];
 editorMain.style.fontFamily = config[1];
 editorMain.style.fontSize = config[2] + "pt";
 }catch(e){localStorage.swdConfig = "false,,11"}
-//スタートセンターの起動
-showStartCenter();
 
 document.getElementById("submenu").style.display = "none";
 document.getElementById("loader").classList.add("fadeout");
