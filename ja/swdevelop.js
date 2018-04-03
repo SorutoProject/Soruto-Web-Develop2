@@ -42,8 +42,12 @@ iframe.contentDocument.designMode = 'on';
 */
 document.getElementById("submenu").style.display = "none";
 document.getElementById("loader").style.display = "none";
-var config = localStorage.swdConfig;
-myCodeMirror.setOption("lineWrapping",config);
+var config = localStorage.swdConfig.split(',');
+myCodeMirror.setOption("lineWrapping",config[0]);
+var editorMain = document.getElementsByClassName('CodeMirror')[0];
+editorMain.style.fontFamily = config[1];
+editorMain.style.fontSize = config[2];
+
 }
 window.onresize = function () {
     Screen();
@@ -199,7 +203,7 @@ function loadLocal(){
 function newFile(){
 	cMenu();
 	if(confirm("新しいファイルを作成すると、現在の編集データが消えますがよろしいですか？")){
-		so.setVal("code","");
+		myCodeMirror.setValue("");
 		document.title="New - Soruto Web Develop";
 		view();
 	}
@@ -235,14 +239,6 @@ function edit(){
 	var krb = byn / 1000;
 	document.getElementById("states").textContent = "> 文字数:" + so.getVal("code").length + "字 サイズ:" + byn + "Byte (" + krb + "KB)";
 }
-function template(st){
-	if(st=="html"){
-	var code = document.getElementById("code");
-	code.value='<!DOCTYPE HTML><html><head><title>Template</title><meta charset="utf-8"></head><body><p>sample</p></body></html>';
-	}
-view();
-cMenu();
-}
 function Screen(){
 	var size = document.documentElement.clientHeight - 60;
 	so.getId("view").style.height= size + "px";
@@ -256,13 +252,19 @@ function changeLang(l,v){
 		cMenu();
 }
 function showConfig(){
-	var screen = '<div style="position:absolute;top:0px;left:0px;background:#fefefe;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();">&nbsp;<input type="button" value="キャンセル" onclick="so.modal.close();"></div><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label>';
+	var screen = '<div style="position:absolute;top:0px;left:0px;background:#fefefe;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();">&nbsp;<input type="button" value="キャンセル" onclick="so.modal.close();"></div><br><span style="font-size:8pt;">※ *のついている設定は次回アクセス時に有効になります</span><br><b>自動改行の設定</b><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label><br><b>フォントの設定*</b><br>フォント名<br><input type="text" id="configFontFamily" style="width:270px;" placeholder="フォント名(例:メイリオ)"><br>フォントサイズ<br><input type="number" id="configFontSize" style="width:100px;">pt';
 	so.modal.custom(screen);
+	var nowconfig = localStorage.swdConfig.split(',');
+	document.getElementById("configWrap").checked = nowconfig[0];
+	document.getElementById('configFontFamily').value = nowconfig[1];
+	document.getElementById('configFontSize').value = nowconfig[2];
 	cMenu();
 }
 function saveConfig(){
 	var configwrap = document.getElementById("configWrap").checked;
-	localStorage.swdConfig = configwrap;
+	var configfontfamily = document.getElementById('configFontFamily').value;
+	var configfontsize = document.getElementById('configFontSize').value;
+	localStorage.swdConfig = configwrap + "," + configfontfamily + "," + configfontsize;
 	myCodeMirror.setOption("lineWrapping",configwrap);
 	so.modal.close();
 }
