@@ -42,6 +42,7 @@ iframe.contentDocument.body.contentEditable = true;
 iframe.contentDocument.designMode = 'on';
 */
 //設定の適用
+try{
 var config = localStorage.swdConfig.split(',');
 	if(config[0] == "true"){autowrapdata = true;}
 	else{autowrapdata=false;}
@@ -49,6 +50,7 @@ myCodeMirror.setOption("lineWrapping",autowrapdata);
 var editorMain = document.getElementsByClassName('CodeMirror')[0];
 editorMain.style.fontFamily = config[1];
 editorMain.style.fontSize = config[2] + "pt";
+}catch(e){}
 //スタートセンターの起動
 showStartCenter();
 
