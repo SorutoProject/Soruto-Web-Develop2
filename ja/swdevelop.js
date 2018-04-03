@@ -212,14 +212,22 @@ function loadLocal(){
 }
 function newFile(){
 	cMenu();
+	var langmenu = '使用する言語を選択<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\');so.modal.close();" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\');so.modal.close();" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\');so.modal.close();" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\');so.modal.close();" class="submenulink">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\');so.modal.close();" class="submenulink">XML</a>';
 	if(myCodeMirror.getValue()!=""){
 		if(confirm("エディタに編集内容が残っています。\n新規作成すると削除されますがよろしいですか?")){
+			so.modal.custom(langmenu);
+			myCodeMirror.setValue("");
+			document.title="New - Soruto Web Develop";
+			view();
+		}
+	}else{
+		so.modal.custom(langmenu);
 		myCodeMirror.setValue("");
 		document.title="New - Soruto Web Develop";
 		view();
-		}
 	}
 }
+
 function cMenu(){
 	document.getElementById("submenu").style.display = "none";
 }
