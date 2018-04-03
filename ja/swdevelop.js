@@ -53,7 +53,10 @@ editorMain.style.fontSize = config[2] + "pt";
 showStartCenter();
 
 document.getElementById("submenu").style.display = "none";
-document.getElementById("loader").style.display = "none";
+document.getElementById("loader").classList.add("fadeout");
+setTimeout(function(){ 
+    document.getElementById("loader").style.display = "none"; 
+  }, 500);
 }
 window.onresize = function () {
     Screen();
