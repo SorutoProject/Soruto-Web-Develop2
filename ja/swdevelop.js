@@ -135,7 +135,7 @@ var content  = document.getElementById("code").value;
 var mimeType = 'text/plain';
 var name     = document.getElementById("filename").value;
 if(name==""){
-	so.modal.al("情報","ファイル名を入力してください");
+	showInfo("&nbsp;&nbsp;情報:<br>&nbsp;&nbsp;&nbsp;ファイル名を入力してください","#fefefe","#f24343");
 	document.getElementById("filename").focus();
 }else{
 // BOMは文字化け対策
@@ -168,6 +168,7 @@ else {
   window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
 }
 cMenu();
+showInfo("&nbsp;&nbsp;ダウンロードを開始しました<br>&nbsp;&nbsp;ファイル名:" + name,"#fefefe","#00af0b");
 }
 }
 function fileOpen(){
@@ -192,13 +193,15 @@ fo.addEventListener("change",function(evt){
 	var fnamelower = fname.toLowerCase();
 	document.title = fname + " - Soruto Web Develop";
 	sessionStorage.filename =fname;
-	if(fnamelower.lastIndexOf('.js')!=-1){changeLang('javascript','sv');}
-	if(fnamelower.lastIndexOf('.htm')!=-1){changeLang('htmlmixed','dv');}
-	if(fnamelower.lastIndexOf('.css')!=-1){changeLang('css','sv');}
-	if(fnamelower.lastIndexOf('.php')!=-1){changeLang('php','sv');}
+	if(fnamelower.lastIndexOf('.js')!=-1){changeLang('javascript','sv');var lang = "JavaScript";}
+	else if(fnamelower.lastIndexOf('.htm')!=-1){changeLang('htmlmixed','dv');var lang = "HTML";}
+	else if(fnamelower.lastIndexOf('.css')!=-1){changeLang('css','sv');var lang = "CSS";}
+	else if(fnamelower.lastIndexOf('.php')!=-1){changeLang('php','sv');var lang = "PHP";}
+	else if(fnamelower.lastIndexOf('.xml')!=-1){changeLang('xml','sv');var lang = "XML";}
 	so.modal.close();
 	so.getId("so-modal").style.cursor="default";
 	view();
+	showInfo("&nbsp;&nbsp;ファイルを開きました<br>&nbsp;&nbsp;ファイル名:" + fname + "<br>&nbsp;&nbsp;ファイルタイプ:" + lang,"#fefefe","#00af0b");
 	myCodeMirror.focus();
   }
 },false);
@@ -300,9 +303,24 @@ function saveConfig(){
 	editorMain.style.fontFamily = configfontfamily;
 	editorMain.style.fontSize = configfontsize + "pt";
 	so.modal.close();
+	showInfo("<br>&nbsp;&nbsp;設定を保存しました","#fefefe","#00af0b");
 }
 function showStartCenter(){
 	var startmenu = '<b>SWD</b> スタートセンター<br><span style="font-size:8pt;background:#202020;color:#fefefe;">Webブラウザで使えるオンラインIDE&nbsp;</span><a href="javascript:void(0)" onclick="so.modal.close();newFile()" class="submenulink">新規作成</a><a href="javascript:void(0)" onclick="so.modal.close();fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0)" onclick="so.modal.close();loadLocal();" class="submenulink" >LocalStorageから読み込む</a><a href="javascript:void(0)" onclick="so.modal.close();showConfig()" class="submenulink" style="border-bottom:#a5a5a5 3px solid;">設定を開く</a><a href="javascript:void(0)" onclick="so.modal.close();" class="submenulink">スタートセンターを閉じる</a>';
 
 	so.modal.custom(startmenu);
+}
+function showInfo(st,color,bc){
+	var info = 	document.getElementById("info");
+	info.classList.remove('fadeout');
+	info.innerHTML = st;
+	info.style.color = color;
+	info.style.background = bc;
+	info.style.display = "block";
+	setTimeout(function(){ 
+    document.getElementById("info").classList.add("fadeout"); 
+  }, 4000);
+	setTimeout(function(){ 
+    document.getElementById("info").style.display = "none"; 
+  }, 4500);
 }
