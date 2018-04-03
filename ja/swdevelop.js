@@ -9,6 +9,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"),{
     lineNumbers: true,
     mode: "htmlmixed",
 	theme: "monokai",
+	lineWrapping: true,
     extraKeys: {
      "Ctrl-F": "findPersistent",
      "Ctrl-Space": "autocomplete"
@@ -41,6 +42,8 @@ iframe.contentDocument.designMode = 'on';
 */
 document.getElementById("submenu").style.display = "none";
 document.getElementById("loader").style.display = "none";
+var config = localStorage.swdConfig;
+myCodeMirror.setOption("lineWrapping",config);
 }
 window.onresize = function () {
     Screen();
@@ -92,7 +95,7 @@ function menu(num){
 		sub.innerHTML='<a href="javascript:void(0)" onclick="newtab(0)" class="submenulink">新しいタブを開く</a><a href="javascript:void(0)" onclick="newtab(1)" class="submenulink">新しいタブでファイルを開く</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==2){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0)" class="submenulink" onclick="showConfig();">設定</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==3){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink">PHP</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
@@ -251,4 +254,15 @@ function changeLang(l,v){
 		if(v == "sv"){viewMode(1);}
 		else if(v == "dv"){viewMode(0);}
 		cMenu();
+}
+function showConfig(){
+	var screen = '<div style="position:absolute;top:0px;left:0px;background:#fefefe;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();"></div><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label>';
+	so.modal.custom(screen);
+	cMenu();
+}
+function saveConfig(){
+	var configwrap = document.getElementById("configWrap").checked;
+	localStorage.swdConfig = configwrap;
+	myCodeMirror.setOption("lineWrapping",configwrap);
+	so.modal.close();
 }
