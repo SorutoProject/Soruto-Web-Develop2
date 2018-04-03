@@ -50,7 +50,7 @@ myCodeMirror.setOption("lineWrapping",autowrapdata);
 var editorMain = document.getElementsByClassName('CodeMirror')[0];
 editorMain.style.fontFamily = config[1];
 editorMain.style.fontSize = config[2] + "pt";
-}catch(e){}
+}catch(e){localStorage.swdConfig = "false,,11"}
 //スタートセンターの起動
 showStartCenter();
 
