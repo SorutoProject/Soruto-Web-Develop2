@@ -256,7 +256,7 @@ function changeLang(l,v){
 		cMenu();
 }
 function showConfig(){
-	var screen = '<div style="position:absolute;top:0px;left:0px;background:#fefefe;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();"></div><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label>';
+	var screen = '<div style="position:absolute;top:0px;left:0px;background:#fefefe;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();">&nbsp;<input type="button" value="キャンセル" onclick="so.modal.close();"></div><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label>';
 	so.modal.custom(screen);
 	cMenu();
 }
