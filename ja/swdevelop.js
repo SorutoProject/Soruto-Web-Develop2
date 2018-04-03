@@ -95,7 +95,7 @@ function menu(num){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==3){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\')" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\')" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\')" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\')" class="submenulink">PHP</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink">PHP</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==4){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'About\',\'<b>Soruto Web Develop</b><br><span style=font-size:10pt>Webブラウザで使えるオンラインIDE<br>Made with CodeMirror.<br>SourceCodeProフォントを使用しています。<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
@@ -169,8 +169,14 @@ fo.addEventListener("change",function(evt){
   reader.onload = function(ev){
     //テキストエリアに表示する
     myCodeMirror.setValue(reader.result);
-	document.title = file[0].name + " - Soruto Web Develop";
-	sessionStorage.filename =file[0].name;
+	var fname = file[0].name;
+	var fnamelower = fname.toLowerCase();
+	document.title = fname + " - Soruto Web Develop";
+	sessionStorage.filename =fname;
+	if(fnamelower.lastIndexOf('.js')!=-1){changeLang('javascript','sv');}
+	if(fnamelower.lastIndexOf('.htm')!=-1){changeLang('htmlmixed','dv');}
+	if(fnamelower.lastIndexOf('.css')!=-1){changeLang('css','sv');}
+	if(fnamelower.lastIndexOf('.php')!=-1){changeLang('php','sv');}
 	so.modal.close();
 	so.getId("so-modal").style.cursor="default";
 	view();
@@ -240,7 +246,9 @@ function Screen(){
 	so.getId("code").style.height= size + "px";
 	document.getElementsByClassName("CodeMirror")[0].style.height = size + 2 + "px";
 }
-function changeLang(l){
+function changeLang(l,v){
 		myCodeMirror.setOption("mode" , l);
+		if(v == "sv"){viewMode(1);}
+		else if(v == "dv"){viewMode(0);}
 		cMenu();
 }
