@@ -48,7 +48,7 @@ var config = localStorage.swdConfig.split(',');
 myCodeMirror.setOption("lineWrapping",autowrapdata);
 var editorMain = document.getElementsByClassName('CodeMirror')[0];
 editorMain.style.fontFamily = config[1];
-editorMain.style.fontSize = config[2];
+editorMain.style.fontSize = config[2] + "pt";
 
 }
 window.onresize = function () {
