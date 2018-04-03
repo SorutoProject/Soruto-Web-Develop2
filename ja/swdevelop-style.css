@@ -50,10 +50,7 @@ body {
  font-size:10pt;
  border-bottom:#a5a5a5 3px solid;
  cursor:default;
- user-select: none;
--moz-user-select: none;
--webkit-user-select: none;
--ms-user-select: none;
+
 }
 .menulink:hover {
  color:#fefefe;
@@ -70,11 +67,7 @@ body {
  display:block;
  width:100%;
  border-bottom:#a5a5a5 1px solid;
- cursor:default;
- user-select: none;
--moz-user-select: none;
--webkit-user-select: none;
--ms-user-select: none;
+ cursor:default
 }
 .submenulink:hover {
  color:#fefefe;
