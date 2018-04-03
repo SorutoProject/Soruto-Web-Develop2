@@ -173,7 +173,7 @@ showInfo("&nbsp;&nbsp;ダウンロードを開始しました<br>&nbsp;&nbsp;フ
 }
 function fileOpen(){
 cMenu();
-var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。</span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css"><br><br><input type="button" onclick="so.modal.close();" value="閉じる">';
+var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。</span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css,.php,.xml"><br><br><input type="button" onclick="so.modal.close();" value="閉じる">';
 so.modal.custom(diaso);
 var fo = document.getElementById("selfile");
 fo.addEventListener("change",function(evt){
