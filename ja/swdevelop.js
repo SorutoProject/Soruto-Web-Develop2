@@ -135,7 +135,7 @@ var content  = document.getElementById("code").value;
 var mimeType = 'text/plain';
 var name     = document.getElementById("filename").value;
 if(name==""){
-	showInfo("&nbsp;&nbsp;情報:<br>&nbsp;&nbsp;&nbsp;ファイル名を入力してください","#fefefe","#f24343");
+	showInfo("情報:<br>&nbsp;ファイル名を入力してください","#fefefe","#f24343");
 	document.getElementById("filename").focus();
 }else{
 // BOMは文字化け対策
@@ -168,7 +168,7 @@ else {
   window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
 }
 cMenu();
-showInfo("&nbsp;&nbsp;ダウンロードを開始しました<br>&nbsp;&nbsp;ファイル名:" + name,"#fefefe","#00af0b");
+showInfo("ダウンロードを開始しました<br>ファイル名:" + name,"#fefefe","#00af0b");
 }
 }
 function fileOpen(){
@@ -201,7 +201,7 @@ fo.addEventListener("change",function(evt){
 	so.modal.close();
 	so.getId("so-modal").style.cursor="default";
 	view();
-	showInfo("&nbsp;&nbsp;ファイルを開きました<br>&nbsp;&nbsp;ファイル名:" + fname + "<br>&nbsp;&nbsp;ファイルタイプ:" + lang,"#fefefe","#00af0b");
+	showInfo("ファイルを開きました<br>ファイル名:" + fname + "<br>ファイルタイプ:" + lang,"#fefefe","#00af0b");
 	myCodeMirror.focus();
   }
 },false);
@@ -209,7 +209,7 @@ fo.addEventListener("change",function(evt){
 function saveLocal(){
 	localStorage.savedata = myCodeMirror.getValue();
 	cMenu();
-	so.modal.al("完了","LocalStorageに上書き保存しました");
+	showInfo("<b>完了</b><br>LocalStorageに上書き保存しました","#fefefe","#00af0b");
 }
 function loadLocal(){
 	try{
@@ -303,7 +303,7 @@ function saveConfig(){
 	editorMain.style.fontFamily = configfontfamily;
 	editorMain.style.fontSize = configfontsize + "pt";
 	so.modal.close();
-	showInfo("<br>&nbsp;&nbsp;設定を保存しました","#fefefe","#00af0b");
+	showInfo("<br>設定を保存しました","#fefefe","#00af0b");
 }
 function showStartCenter(){
 	var startmenu = '<b>SWD</b> スタートセンター<br><span style="font-size:8pt;background:#202020;color:#fefefe;">Webブラウザで使えるオンラインIDE&nbsp;</span><a href="javascript:void(0)" onclick="so.modal.close();newFile()" class="submenulink">新規作成</a><a href="javascript:void(0)" onclick="so.modal.close();fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0)" onclick="so.modal.close();loadLocal();" class="submenulink" >LocalStorageから読み込む</a><a href="javascript:void(0)" onclick="so.modal.close();showConfig()" class="submenulink" style="border-bottom:#a5a5a5 3px solid;">設定を開く</a><a href="javascript:void(0)" onclick="so.modal.close();" class="submenulink">スタートセンターを閉じる</a>';
