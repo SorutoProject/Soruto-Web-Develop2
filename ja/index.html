@@ -1,9 +1,9 @@
 <!DOCTYPE HTML><html><head><title>Soruto Web Develop</title><meta charset="utf-8">
 </head>
 <body><link rel="stylesheet" href="swdevelop-style.css"><link rel="shortcut icon" href="../soruto-web-develop.ico">
-<div id="loader" style="width:100%;height:100%;position:fixed;top:0px;left:0px;background:#272822;z-index:7;color:#fefefe;"><table width="100%" height="100%"><tr><td align="center"><span style="font-size:18pt;"><b>&lt;/&gt;</b></span><br>Loading...</td></tr></table></div>
+<div id="loader" style="width:100%;height:100%;position:fixed;top:0px;left:0px;background:#272822;z-index:7;color:#fefefe;"><table width="100%" height="100%"><tr><td align="center"><span style="font-size:24pt;"><b>&lt;/&gt;</b></span><br>Loading...</td></tr></table></div>
 <div id="menu"><a href="javascript:void(0);" onclick="sMenu();" onmouseover="menu(0);" class="menulink">&nbsp;ファイル&nbsp;</a> <a href="javascript:void(0);" onclick="sMenu();" onmouseover="menu(1);" class="menulink">&nbsp;+&nbsp;</a> <a href="javascript:void(0);" onclick="sMenu();" onmouseover="menu(2);" class="menulink">&nbsp;表示&nbsp;</a> <a href="javascript:void(0);" onclick="sMenu();" onmouseover="menu(3);" class="menulink">&nbsp;言語&nbsp;</a> <a href="javascript:void(0);" onmouseover="menu(4)" onclick="sMenu();" class="menulink">&nbsp;About&nbsp;</a></div><div id="submenu"></div>
-<textarea id="code" onkeyup="view();" spellcheck="false" onclick="cMenu();" placeholder="コードを入力..."></textarea><iframe id="view" onclick="cMenu();"></iframe><!--<div id="change"><a href="javascript:void(0);" onclick="edit();" class="menulink">&nbsp;変更を適用&nbsp;</a></div>--><div id="states"></div><div id="so-modal"></div><div id="info"></div>
+<textarea id="code" onkeyup="view();" spellcheck="false" onclick="cMenu();" placeholder="コードを入力..."></textarea><iframe id="view" onclick="cMenu();"></iframe><!--<div id="change"><a href="javascript:void(0);" onclick="edit();" class="menulink">&nbsp;変更を適用&nbsp;</a></div>--><div id="states"></div><div id="so-modal"></div><div id="info" onclick="closeInfo();"></div>
 <link rel="stylesheet" href="../lib/codemirror.css">
 <link rel="stylesheet" href="../theme/monokai.css">
 <link rel="stylesheet" href="../addon/show-hint.css">

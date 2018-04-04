@@ -56,6 +56,7 @@ editorMain.style.fontSize = config[2] + "pt";
 }catch(e){localStorage.swdConfig = "false,,11"}
 
 document.getElementById("submenu").style.display = "none";
+document.getElementById("info").style.display = "none";
 document.getElementById("loader").classList.add("fadeout");
 setTimeout(function(){ 
     document.getElementById("loader").style.display = "none"; 
@@ -135,7 +136,7 @@ var content  = document.getElementById("code").value;
 var mimeType = 'text/plain';
 var name     = document.getElementById("filename").value;
 if(name==""){
-	showInfo("情報:<br>&nbsp;ファイル名を入力してください","#fefefe","#f24343");
+	showInfo("ファイル名を入力してください","#fefefe","#f24343");
 	document.getElementById("filename").focus();
 }else{
 // BOMは文字化け対策
@@ -209,7 +210,7 @@ fo.addEventListener("change",function(evt){
 function saveLocal(){
 	localStorage.savedata = myCodeMirror.getValue();
 	cMenu();
-	showInfo("<b>完了</b><br>LocalStorageに上書き保存しました","#fefefe","#00af0b");
+	showInfo("<br>LocalStorageに上書き保存しました","#fefefe","#00af0b");
 }
 function loadLocal(){
 	try{
@@ -303,7 +304,7 @@ function saveConfig(){
 	editorMain.style.fontFamily = configfontfamily;
 	editorMain.style.fontSize = configfontsize + "pt";
 	so.modal.close();
-	showInfo("<br>設定を保存しました","#fefefe","#00af0b");
+	showInfo("設定を保存しました","#fefefe","#00af0b");
 }
 function showStartCenter(){
 	var startmenu = '<b>SWD</b> スタートセンター<br><span style="font-size:8pt;background:#202020;color:#fefefe;">Webブラウザで使えるオンラインIDE&nbsp;</span><a href="javascript:void(0)" onclick="so.modal.close();newFile()" class="submenulink">新規作成</a><a href="javascript:void(0)" onclick="so.modal.close();fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0)" onclick="so.modal.close();loadLocal();" class="submenulink" >LocalStorageから読み込む</a><a href="javascript:void(0)" onclick="so.modal.close();showConfig()" class="submenulink" style="border-bottom:#a5a5a5 3px solid;">設定を開く</a><a href="javascript:void(0)" onclick="so.modal.close();" class="submenulink">スタートセンターを閉じる</a>';
@@ -312,8 +313,9 @@ function showStartCenter(){
 }
 function showInfo(st,color,bc){
 	var info = 	document.getElementById("info");
+	if(info.style.display =="none"){
 	info.classList.remove('fadeout');
-	info.innerHTML = st;
+	info.innerHTML = "<b>情報</b><br>"+st;
 	info.style.color = color;
 	info.style.background = bc;
 	info.style.display = "block";
@@ -323,4 +325,9 @@ function showInfo(st,color,bc){
 	setTimeout(function(){ 
     document.getElementById("info").style.display = "none"; 
   }, 4500);
+}else{
+}
+}
+function closeInfo(){
+	document.getElementById("info").style.display = "none"; 
 }
