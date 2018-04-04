@@ -80,6 +80,7 @@ function viewMode(num){
 	if(num==0){
 		so.getId("code").style.width = "49.5%";
 		document.getElementsByClassName("CodeMirror")[0].style.width = "50%";
+		document.getElementsByClassName("CodeMirror")[0].style.display = "block";
 		so.getId("view").style.width = "50%";
 		so.display("view");
 		so.display("code");
@@ -87,6 +88,7 @@ function viewMode(num){
 	}else if(num==1){
 		so.getId("code").style.width = "99.5%";
 		document.getElementsByClassName("CodeMirror")[0].style.width = "100%";
+		document.getElementsByClassName("CodeMirror")[0].style.display = "block";
 		so.displayNone("view");
 		so.display("code");
 	}
