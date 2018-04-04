@@ -304,7 +304,7 @@ function saveConfig(){
 	editorMain.style.fontFamily = configfontfamily;
 	editorMain.style.fontSize = configfontsize + "pt";
 	so.modal.close();
-	showInfo("設定を保存しました","#fefefe","#00af0b");
+	showInfo("設定を保存して適用しました","#fefefe","#00af0b");
 }
 function showStartCenter(){
 	var startmenu = '<b>SWD</b> スタートセンター<br><span style="font-size:8pt;background:#202020;color:#fefefe;">Webブラウザで使えるオンラインIDE&nbsp;</span><a href="javascript:void(0)" onclick="so.modal.close();newFile()" class="submenulink">新規作成</a><a href="javascript:void(0)" onclick="so.modal.close();fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0)" onclick="so.modal.close();loadLocal();" class="submenulink" >LocalStorageから読み込む</a><a href="javascript:void(0)" onclick="so.modal.close();showConfig()" class="submenulink" style="border-bottom:#a5a5a5 3px solid;">設定を開く</a><a href="javascript:void(0)" onclick="so.modal.close();" class="submenulink">スタートセンターを閉じる</a>';
