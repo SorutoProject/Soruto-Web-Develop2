@@ -286,7 +286,7 @@ function changeLang(l,v){
 		cMenu();
 }
 function showConfig(){
-	var screen = '<div style="font-size:10pt;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();">&nbsp;<input type="button" value="保存せず閉じる" onclick="so.modal.close();"><br><b>自動改行の設定</b><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label><br><b>フォントの設定</b><br>フォント名<br><input type="text" id="configFontFamily" style="width:270px;" placeholder="フォント名(例:メイリオ)"><br>フォントサイズ<br><input type="number" id="configFontSize" style="width:100px;">pt</div>';
+	var screen = '<div style="font-size:10pt;"><b>設定</b>&nbsp;<input type="button" value="保存" onclick="saveConfig();">&nbsp;<input type="button" value="保存せず閉じる" onclick="so.modal.close();"><br><b><u>自動改行の設定</u></b><br><label><input type="checkbox" id="configWrap">自動改行を有効にする</label><br><b><u>フォントの設定</u></b><br>フォント名<br><input type="text" id="configFontFamily" style="width:270px;" placeholder="フォント名(例:メイリオ)"><br>フォントサイズ<br><input type="number" id="configFontSize" style="width:100px;">pt</div>';
 	so.modal.custom(screen);
 	var nowconfig = localStorage.swdConfig.split(',');
 	if(nowconfig[0] == "true"){autowrapdata = true;}
