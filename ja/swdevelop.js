@@ -183,6 +183,7 @@ else {
 }
 cMenu();
 showInfo('ダウンロードを開始しました<br>ファイル名:' + name + '<br>※ダウンロードが始まらない場合は、<br>広告ブロッカーを無効にしてください',"#fefefe","#00af0b");
+document.title = name + "- Soruto Web Develop";
 }
 }
 function fileOpen(){
