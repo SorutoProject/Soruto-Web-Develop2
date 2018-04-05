@@ -70,8 +70,10 @@ window.onbeforeunload = function(e) {
     };
 function view(){
 	myCodeMirror.save();
-	var code = so.getVal("code");
-	document.getElementById("view").contentWindow.document.body.innerHTML = code;
+	var motocode = so.getVal("code");
+	var viewcode = motocode.split("<a").join("<u");
+	viewcode = viewcode.split("</a>").join("</u>");//リンクを置き換え(エラー対策)
+	document.getElementById("view").contentWindow.document.body.innerHTML = viewcode;
 	var byn = encodeURI(code).replace(/%[0-9A-F]{2}/g, '*').length + 3;
 	var krb = byn / 1000;
 	document.getElementById("states").textContent = "> 文字数:" + code.length + "字 サイズ:" + byn + "Byte (" + krb + "KB)";
