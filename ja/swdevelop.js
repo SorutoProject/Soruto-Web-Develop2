@@ -146,8 +146,8 @@ function sMenu(){
 function fileDown(){
 myCodeMirror.save();
 var content  = document.getElementById("code").value;
-var mimeType = 'text/plain';
 var name     = document.getElementById("filename").value;
+var mimeType = "text/*";
 if(name==""){
 	showInfo("ファイル名を入力してください","#fefefe","#f24343");
 	document.getElementById("filename").focus();
@@ -182,7 +182,7 @@ else {
   window.open('data:' + mimeType + ';base64,' + window.Base64.encode(content), '_blank');
 }
 cMenu();
-showInfo("ダウンロードを開始しました<br>ファイル名:" + name,"#fefefe","#00af0b");
+showInfo('ダウンロードを開始しました<br>ファイル名:' + name + '<br>※ダウンロードが始まらない場合は、<br>広告ブロッカーを無効にしてください',"#fefefe","#00af0b");
 }
 }
 function fileOpen(){
