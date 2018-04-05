@@ -98,6 +98,10 @@ function viewMode(num){
 		so.displayNone("code");
 		document.getElementsByClassName("CodeMirror")[0].style.display = "none";
 	}
+//カーソル位置ずれ対策
+myCodeMirror.save();
+var content  = document.getElementById("code").value;
+myCodeMirror.setValue(content);
 }
 function menu(num){
 	var sub = document.getElementById("submenu");
