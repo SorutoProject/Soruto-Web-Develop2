@@ -37,6 +37,8 @@ window.onload = function(){
 	//スタートセンターの起動
 	showStartCenter();
 	}
+	so.display("view");
+	so.display("code");
 	view();
 	Screen();
 /*var iframe = document.querySelector('iframe');
@@ -70,13 +72,15 @@ window.onbeforeunload = function(e) {
     };
 function view(){
 	myCodeMirror.save();
-	var motocode = so.getVal("code");
-	var viewcode = motocode.split("<a").join("<u");
-	viewcode = viewcode.split("</a>").join("</u>");//リンクを置き換え(エラー対策)
-	document.getElementById("view").contentWindow.document.body.innerHTML = viewcode;
+	var code = so.getVal("code");
 	var byn = encodeURI(code).replace(/%[0-9A-F]{2}/g, '*').length + 3;
 	var krb = byn / 1000;
 	document.getElementById("states").textContent = "> 文字数:" + code.length + "字 サイズ:" + byn + "Byte (" + krb + "KB)";
+	if(document.getElementById("view").style.display == "block"){
+	var viewcode = code.split("<a").join("<u");
+	viewcode = viewcode.split("</a>").join("</u>");//リンクを置き換え(エラー対策)
+	document.getElementById("view").contentWindow.document.body.innerHTML = viewcode;
+	}
 }
 function viewMode(num){
 	if(num==0){
@@ -99,6 +103,7 @@ function viewMode(num){
 		so.display("view");
 		so.displayNone("code");
 		document.getElementsByClassName("CodeMirror")[0].style.display = "none";
+		view();
 	}
 //カーソル位置ずれ対策
 myCodeMirror.save();
