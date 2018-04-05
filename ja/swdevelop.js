@@ -244,12 +244,14 @@ function newFile(){
 			myCodeMirror.setValue("");
 			document.title="New - Soruto Web Develop";
 			view();
+			sessionStorage.filename = "";
 		}
 	}else{
 		so.modal.custom(langmenu);
 		myCodeMirror.setValue("");
 		document.title="New - Soruto Web Develop";
 		view();
+		sessionStorage.filename = "";
 	}
 }
 
