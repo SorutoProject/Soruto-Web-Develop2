@@ -421,12 +421,14 @@ function setTemplate(url){
       var data = xhr.responseText;
 	  myCodeMirror.setValue(data);
 	  so.modal.close();
+	  view();
     }
     // ローカルファイル用
     if (xhr.readyState === 4 && xhr.status === 0){
       var data = xhr.responseText;
 	  myCodeMirror.setValue(data);
 	  so.modal.close();
+	  view();
     }
   };
   xhr.send(null);
