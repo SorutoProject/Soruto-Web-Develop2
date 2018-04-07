@@ -390,7 +390,7 @@ function changeTab(num){
 	else{
 		changeLang(changetablang,"sv");
 		myCodeMirror.save();
-		var now = so.getVal("code");//編集中のタブのテキストを取得
+		var code = so.getVal("code");//編集中のタブのテキストを取得
 		var byn = encodeURI(code).replace(/%[0-9A-F]{2}/g, '*').length + 3;
 		var krb = byn / 1000;
 		document.getElementById("states").textContent = "> 文字数:" + code.length + "字 サイズ:" + byn + "Byte (" + krb + "KB)";
