@@ -391,6 +391,7 @@ function changeTab(num){
 		changeLang(changetablang,"sv");
 	}	
 sessionStorage.nowtab = num;
+myCodeMirror.clearHistory();
 document.title = document.getElementById("swdtab" + num).textContent + " - Soruto Web Develop";
 }
 function template(){
