@@ -120,11 +120,10 @@ function menu(num){
 	//メニュー設定(class="submenulink"を指定したaタグはwidth:100%なので、<br>不要)
 	if(num==0){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="newFile();" class="submenulink">新規作成</a><input type="text" id="filename" style="width:295px;background:#4c4c4c;color:#fefefe;" placeholder="ファイル名..." autocomplete="off" onkeyup="savefilename();"><br><a href="javascript:void(0);" onclick="fileDown();" class="submenulink">ダウンロード</a><a href="javascript:void(0);" onclick="fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0);" onclick="saveLocal();" class="submenulink">ブラウザ(LocalStorage)に保存</a><a href="javascript:void(0);" onclick="loadLocal();" class="submenulink">ブラウザ(LocalStorage)から読み込み</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
-		var filename = sessionStorage.filename;
-		if(filename===undefined){}
-		else{
-			so.setVal("filename",filename);
-		}
+		var nowtab = sessionStorage.nowtab;
+		var filename = document.getElementById("swdtab" + nowtab).textContent;
+		if(filename == "NEW"){}
+		else{document.getElementById("filename").value = filename;}
 	}
 	else if(num==1){
 		sub.innerHTML='<a href="javascript:void(0)" onclick="newtab(0)" class="submenulink">新しいウィンドウを開く</a><a href="javascript:void(0)" onclick="newtab(1)" class="submenulink">新しいウィンドウでファイルを開く</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
@@ -218,7 +217,6 @@ fo.addEventListener("change",function(evt){
 	document.title = fname + " - Soruto Web Develop";
 	var nowtabnum = sessionStorage.getItem("nowtab");
 	document.getElementById("swdtab" + nowtabnum).innerHTML = fname;
-	sessionStorage.filename =fname;
 	if(fnamelower.lastIndexOf('.js')!=-1){changeLang('javascript','sv');var lang = "JavaScript";}
 	else if(fnamelower.lastIndexOf('.htm')!=-1){changeLang('htmlmixed','dv');var lang = "HTML";}
 	else if(fnamelower.lastIndexOf('.css')!=-1){changeLang('css','sv');var lang = "CSS";}
@@ -256,14 +254,16 @@ function newFile(){
 			myCodeMirror.setValue("");
 			document.title="New - Soruto Web Develop";
 			view();
-			sessionStorage.filename = "";
+			var now = sessionStorage.nowtab;
+			document.getElementById("swdtab" + now).innerHTML = "NEW";
 		}
 	}else{
 		so.modal.custom(langmenu);
 		myCodeMirror.setValue("");
 		document.title="New - Soruto Web Develop";
 		view();
-		sessionStorage.filename = "";
+		var now = sessionStorage.nowtab;
+		document.getElementById("swdtab" + now).innerHTML = "NEW";
 	}
 }
 
