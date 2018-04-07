@@ -393,3 +393,39 @@ function changeTab(num){
 sessionStorage.nowtab = num;
 document.title = document.getElementById("swdtab" + num).textContent + " - Soruto Web Develop";
 }
+function template(){
+  //テンプレ選択画面のHTMLを取得
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', "../template/index.html", true);
+  xhr.onreadystatechange = function(){
+    // 本番用
+    if (xhr.readyState === 4 && xhr.status === 200){
+      var windata = xhr.responseText;
+	  so.modal.custom(windata);
+    }
+    // ローカルファイル用
+    if (xhr.readyState === 4 && xhr.status === 0){
+      var windata = xhr.responseText;
+	  so.modal.custom(windata);
+    }
+  };
+  xhr.send(null);
+};
+function setTemplate(url){
+	//テンプレをダウンロード
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', "../template" + url ,true);
+  xhr.onreadystatechange = function(){
+    // 本番用
+    if (xhr.readyState === 4 && xhr.status === 200){
+      var data = xhr.responseText;
+	  myCodeMirror.setValue(data);
+    }
+    // ローカルファイル用
+    if (xhr.readyState === 4 && xhr.status === 0){
+      var data = xhr.responseText;
+	  myCodeMirror.setValue(data);
+    }
+  };
+  xhr.send(null);
+};
