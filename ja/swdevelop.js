@@ -382,13 +382,14 @@ function changeTab(num){
 	
 	if(changetablang === null){
 		changeLang('htmlmixed','dv');
+		view();
 	}else if(changetablang == "htmlmixed"){
 		changeLang("htmlmixed","dv");
+		view();
 	}
 	else{
 		changeLang(changetablang,"sv");
 	}	
 sessionStorage.nowtab = num;
 document.title = document.getElementById("swdtab" + num).textContent + " - Soruto Web Develop";
-view();
 }
