@@ -420,11 +420,13 @@ function setTemplate(url){
     if (xhr.readyState === 4 && xhr.status === 200){
       var data = xhr.responseText;
 	  myCodeMirror.setValue(data);
+	  so.modal.close();
     }
     // ローカルファイル用
     if (xhr.readyState === 4 && xhr.status === 0){
       var data = xhr.responseText;
 	  myCodeMirror.setValue(data);
+	  so.modal.close();
     }
   };
   xhr.send(null);
