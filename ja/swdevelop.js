@@ -59,16 +59,21 @@ editorMain.style.fontSize = config[2] + "pt";
 
 document.getElementById("submenu").style.display = "none";
 document.getElementById("info").style.display = "none";
+sessionStorage.clear();
+sessionStorage.nowtab = 1;//現在開かれているタブの内部番号
+document.getElementById("swdtab1").classList.add("selectedtab");
+document.getElementById("swdtab1").classList.remove("tabelem");
 document.getElementById("loader").classList.add("fadeout");
 setTimeout(function(){ 
     document.getElementById("loader").style.display = "none"; 
   }, 500);
+document.title = "NEW - Soruto Web Develop";
 }
 window.onresize = function () {
     Screen();
 }
 window.onbeforeunload = function(e) {
-      return 'このページから出ると、編集内容が失われますが、続行しますか?';
+      return 'このページから出ると、すべてのタブの編集内容が失われますが、続行しますか?';
     };
 function view(){
 	myCodeMirror.save();
@@ -122,13 +127,15 @@ function menu(num){
 		}
 	}
 	else if(num==1){
-		sub.innerHTML='<a href="javascript:void(0)" onclick="newtab(0)" class="submenulink">新しいタブを開く</a><a href="javascript:void(0)" onclick="newtab(1)" class="submenulink">新しいタブでファイルを開く</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0)" onclick="newtab(0)" class="submenulink">新しいウィンドウを開く</a><a href="javascript:void(0)" onclick="newtab(1)" class="submenulink">新しいウィンドウでファイルを開く</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==2){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0)" class="submenulink" onclick="showStartCenter();cMenu();">スタートセンターを開く</a><a href="javascript:void(0)" class="submenulink" onclick="showConfig();"><b>設定を開く</b></a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==3){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\')" class="submenulink">XML</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink" id="langhtmlmixed">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink" id="langjavascript">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink" id="langcss">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink" id="langphp">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\')" class="submenulink" id="langxml">XML</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		var changelang = myCodeMirror.getOption("mode");
+		document.getElementById("lang" + changelang).style.background = "#138200";
 	}
 	else if(num==4){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'About\',\'<b>Soruto Web Develop</b><br><span style=font-size:10pt>Webブラウザで使えるソースコードエディタ<br>Made with  CodeMirror.<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop2/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
@@ -184,11 +191,13 @@ else {
 cMenu();
 showInfo('ダウンロードを開始しました<br>ファイル名:' + name + '<br>※ダウンロードが始まらない場合は、<br>広告ブロッカーを無効にしてください',"#fefefe","#00af0b");
 document.title = name + "- Soruto Web Develop";
+var nowtabnum = sessionStorage.nowtab;
+document.getElementById("swdtab" + nowtabnum).innerHTML = name;
 }
 }
 function fileOpen(){
 cMenu();
-var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。</span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css,.php,.xml"><br><br><input type="button" onclick="so.modal.close();" value="閉じる">';
+var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。<br><b>※現在のタブで編集中の内容は削除されます</b></b></span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css,.php,.xml"><br><br><input type="button" onclick="so.modal.close();" value="閉じる">';
 so.modal.custom(diaso);
 var fo = document.getElementById("selfile");
 fo.addEventListener("change",function(evt){
@@ -207,6 +216,8 @@ fo.addEventListener("change",function(evt){
 	var fname = file[0].name;
 	var fnamelower = fname.toLowerCase();
 	document.title = fname + " - Soruto Web Develop";
+	var nowtabnum = sessionStorage.getItem("nowtab");
+	document.getElementById("swdtab" + nowtabnum).innerHTML = fname;
 	sessionStorage.filename =fname;
 	if(fnamelower.lastIndexOf('.js')!=-1){changeLang('javascript','sv');var lang = "JavaScript";}
 	else if(fnamelower.lastIndexOf('.htm')!=-1){changeLang('htmlmixed','dv');var lang = "HTML";}
@@ -288,7 +299,7 @@ function edit(){
 	document.getElementById("states").textContent = "> 文字数:" + so.getVal("code").length + "字 サイズ:" + byn + "Byte (" + krb + "KB)";
 }
 function Screen(){
-	var size = document.documentElement.clientHeight - 60;
+	var size = document.documentElement.clientHeight - 87;
 	so.getId("view").style.height= size + "px";
 	so.getId("code").style.height= size + "px";
 	document.getElementsByClassName("CodeMirror")[0].style.height = size + 2 + "px";
@@ -346,4 +357,38 @@ function showInfo(st,color,bc){
 }
 function closeInfo(){
 	document.getElementById("info").style.display = "none"; 
+}
+
+function changeTab(num){
+	cMenu();
+	myCodeMirror.save();
+	var now = so.getVal("code");//編集中のタブのテキストを取得
+	var nowlang = myCodeMirror.getOption("mode");//言語モードを取得
+	var nownum = sessionStorage.nowtab;
+	sessionStorage.setItem('swdsavetab' + nownum , now);
+	sessionStorage.setItem('swdsavetablang' + nownum , nowlang);
+	var changetabdata = sessionStorage.getItem('swdsavetab' + num);
+	var changetablang = sessionStorage.getItem('swdsavetablang' + num);
+	
+	document.getElementById("swdtab" + nownum).classList.add("tabelem");
+	document.getElementById("swdtab" + nownum).classList.remove("selectedtab");
+	document.getElementById("swdtab" + num).classList.add("selectedtab");
+	document.getElementById("swdtab" + num).classList.remove("tabelem");
+	if(changetabdata === null){
+		myCodeMirror.setValue("");
+	}else{
+	myCodeMirror.setValue(changetabdata);
+	}
+	
+	if(changetablang === null){
+		changeLang('htmlmixed','dv');
+	}else if(changetablang == "htmlmixed"){
+		changeLang("htmlmixed","dv");
+	}
+	else{
+		changeLang(changetablang,"sv");
+	}	
+sessionStorage.nowtab = num;
+document.title = document.getElementById("swdtab" + num).textContent + " - Soruto Web Develop";
+view();
 }
