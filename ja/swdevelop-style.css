@@ -49,8 +49,7 @@ body {
  text-decoration:none;
  font-size:10pt;
  border-bottom:#a5a5a5 3px solid;
- cursor:default;
-
+ cursor:default
 }
 .menulink:hover {
  color:#fefefe;
@@ -110,23 +109,23 @@ input[type=text]:hover,input[type=text]:focus,input[type=button]:hover,input[typ
  font-family:メイリオ,Meiryo,meiryo ui,ヒラギノ角ゴシック,hiragino sans,sans-serif;
  font-size:10pt;
  cursor:default;
- z-index: 6;
+ z-index:6
 }
 #so-modal {
- z-index:7;
+ z-index:7
 }
-#info{
-	position:fixed;
-	bottom:20px;
-	right:25px;
-	width:300px;
-	height:120px;
-	display:none;
-	border-radius:6px;
-	background:#b4b4b4;
-	color:#000;
-	font-size:10pt;
-	z-index:5;
+#info {
+ position:fixed;
+ bottom:20px;
+ right:25px;
+ width:300px;
+ height:120px;
+ display:none;
+ border-radius:6px;
+ background:#b4b4b4;
+ color:#000;
+ font-size:10pt;
+ z-index:5
 }
 #change {
  position:absolute;
@@ -141,48 +140,48 @@ input[type=text]:hover,input[type=text]:focus,input[type=button]:hover,input[typ
  height:500px
 }
 .fadeout {
-  animation : fadeOut 0.5s;
-  animation-fill-mode: both;
+ animation:fadeOut .5s;
+ animation-fill-mode:both
 }
 @keyframes fadeOut {
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
+ 0% {
+  opacity:1
+ }
+ 100% {
+  opacity:0
+ }
 }
-#tabs{
-	position:fixed;
-	top:30px;
-	left:0px;
-	background:#7c7c7c;
-	color:#fefefe;
-	width:100%;
-	height:25px;
+#tabs {
+ position:fixed;
+ top:30px;
+ left:0;
+ background:#7c7c7c;
+ color:#fefefe;
+ width:100%;
+ height:25px
 }
-.tabelem{
-	position:fixed;
-	top:30px;
-	width:80px;
-	height:25px;
-	font-size:9pt;
-	background:#4c4c4c;
-	border:#fefefe 1px solid;
-	cursor:default;
-	white-space: nowrap;
+.tabelem {
+ position:fixed;
+ top:30px;
+ width:80px;
+ height:25px;
+ font-size:8pt;
+ background:#4c4c4c;
+ border:#fefefe 1px solid;
+ cursor:default;
+ white-space:nowrap
 }
-.tabelem:hover{
-	background:#2c2c2c;
+.tabelem:hover {
+ background:#2c2c2c
 }
-.selectedtab{
-	position:fixed;
-	top:30px;
-	width:80px;
-	height:25px;
-	font-size:9pt;
-	background:#0069b7;
-	border:#fefefe 1px solid;
-	cursor:default;
-	white-space: nowrap;
-	font-weight:bold;
+.selectedtab {
+ position:fixed;
+ top:30px;
+ width:80px;
+ height:25px;
+ font-size:8pt;
+ background:#0069b7;
+ border:#fefefe 1px solid;
+ cursor:default;
+ white-space:nowrap;
+}
