@@ -414,7 +414,7 @@ function template(){
 function setTemplate(url){
 	//テンプレをダウンロード
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', "../template" + url ,true);
+  xhr.open('GET', "../template/" + url ,true);
   xhr.onreadystatechange = function(){
     // 本番用
     if (xhr.readyState === 4 && xhr.status === 200){
