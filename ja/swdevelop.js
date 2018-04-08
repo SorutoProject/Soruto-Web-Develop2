@@ -61,6 +61,7 @@ document.getElementById("submenu").style.display = "none";
 document.getElementById("info").style.display = "none";
 sessionStorage.clear();
 sessionStorage.nowtab = 1;//現在開かれているタブの内部番号
+sessionStorage.dualview = "dv";
 document.getElementById("swdtab1").classList.add("selectedtab");
 document.getElementById("swdtab1").classList.remove("tabelem");
 document.getElementById("loader").classList.add("fadeout");
@@ -82,13 +83,21 @@ function view(){
 	var krb = byn / 1000;
 	document.getElementById("states").textContent = "> 文字数:" + code.length + "字 サイズ:" + byn + "Byte (" + krb + "KB)";
 	if(document.getElementById("view").style.display == "block"){
-	var viewcode = code.split("<a").join("<u");
-	viewcode = viewcode.split("</a>").join("</u>");//リンクを置き換え(エラー対策)
-	document.getElementById("view").contentWindow.document.body.innerHTML = viewcode;
+		if(sessionStorage.dualview == "dv"){
+			var viewcode = code.split("<a").join("<u");
+			viewcode = viewcode.split("</a>").join("</u>");//リンクを置き換え(エラー対策)
+			document.getElementById("view").contentWindow.document.body.innerHTML = viewcode;
+		}else if(sessionStorage.dualview=="mdv"){
+			var source = marked(code);
+			var viewcode = source.split("<a").join("<u");
+			viewcode = viewcode.split("</a>").join("</u>");//リンクを置き換え(エラー対策)
+			document.getElementById("view").contentWindow.document.body.innerHTML = viewcode;	
+		}
 	}
 }
 function viewMode(num){
 	if(num==0){
+		sessionStorage.dualview = "dv";
 		so.getId("code").style.width = "49.5%";
 		document.getElementsByClassName("CodeMirror")[0].style.width = "50%";
 		document.getElementsByClassName("CodeMirror")[0].style.display = "block";
@@ -110,6 +119,16 @@ function viewMode(num){
 		document.getElementsByClassName("CodeMirror")[0].style.display = "none";
 		view();
 	}
+	else if(num==3){
+		sessionStorage.dualview = "mdv";
+		so.getId("code").style.width = "49.5%";
+		document.getElementsByClassName("CodeMirror")[0].style.width = "50%";
+		document.getElementsByClassName("CodeMirror")[0].style.display = "block";
+		so.getId("view").style.width = "50%";
+		so.display("view");
+		so.display("code");
+		view();
+	}
 //カーソル位置ずれ対策
 myCodeMirror.save();
 var content  = document.getElementById("code").value;
@@ -129,10 +148,10 @@ function menu(num){
 		sub.innerHTML='<a href="javascript:void(0)" onclick="newtab(0)" class="submenulink">新しいウィンドウを開く</a><a href="javascript:void(0)" onclick="newtab(1)" class="submenulink">新しいウィンドウでファイルを開く</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==2){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0)" class="submenulink" onclick="showStartCenter();cMenu();">スタートセンターを開く</a><a href="javascript:void(0)" class="submenulink" onclick="showConfig();"><b>設定を開く</b></a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(3);cMenu();" class="submenulink">マークダウン表示モード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0)" class="submenulink" onclick="showStartCenter();cMenu();">スタートセンターを開く</a><a href="javascript:void(0)" class="submenulink" onclick="showConfig();"><b>設定を開く</b></a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==3){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink" id="langhtmlmixed">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink" id="langjavascript">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink" id="langcss">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink" id="langphp">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\')" class="submenulink" id="langxml">XML</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink" id="langhtmlmixed">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink" id="langjavascript">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink" id="langcss">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink" id="langphp">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\')" class="submenulink" id="langxml">XML</a><a href="javascript:void(0);" onclick="changeLang(\'markdown\',\'mdv\')" class="submenulink" id="langmarkdown">MarkDown(MD)</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 		var changelang = myCodeMirror.getOption("mode");
 		document.getElementById("lang" + changelang).style.background = "#138200";
 	}
@@ -196,7 +215,7 @@ document.getElementById("swdtab" + nowtabnum).innerHTML = name;
 }
 function fileOpen(){
 cMenu();
-var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。<br><b>※現在のタブで編集中の内容は削除されます</b></b></span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css,.php,.xml"><br><br><input type="button" onclick="so.modal.close();" value="閉じる">';
+var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。<br><b>※現在のタブで編集中の内容は削除されます</b></b></span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css,.php,.xml,.md"><br><br><input type="button" onclick="so.modal.close();" value="閉じる">';
 so.modal.custom(diaso);
 var fo = document.getElementById("selfile");
 fo.addEventListener("change",function(evt){
@@ -222,6 +241,7 @@ fo.addEventListener("change",function(evt){
 	else if(fnamelower.lastIndexOf('.css')!=-1){changeLang('css','sv');var lang = "CSS";}
 	else if(fnamelower.lastIndexOf('.php')!=-1){changeLang('php','sv');var lang = "PHP";}
 	else if(fnamelower.lastIndexOf('.xml')!=-1){changeLang('xml','sv');var lang = "XML";}
+	else if(fnamelower.lastIndexOf('.md')!=-1){changeLang('markdown','mdv');var lang = "MD";}
 	so.modal.close();
 	so.getId("so-modal").style.cursor="default";
 	view();
@@ -247,7 +267,7 @@ function loadLocal(){
 }
 function newFile(){
 	cMenu();
-	var langmenu = '使用する言語を選択<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\');so.modal.close();myCodeMirror.focus();" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\');so.modal.close();myCodeMirror.focus();" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\');so.modal.close();myCodeMirror.focus();" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\');so.modal.close();myCodeMirror.focus();" class="submenulink">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\');so.modal.close();" class="submenulink">XML</a>';
+	var langmenu = '使用する言語を選択<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\');so.modal.close();myCodeMirror.focus();" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\');so.modal.close();myCodeMirror.focus();" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\');so.modal.close();myCodeMirror.focus();" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\');so.modal.close();myCodeMirror.focus();" class="submenulink">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\');so.modal.close();" class="submenulink">XML</a><a href="javascript:void(0);" onclick="changeLang(\'markdown\',\'mdv\');so.modal.close();" class="submenulink">MarkDown(MD)</a>';
 	if(myCodeMirror.getValue()!=""){
 		if(confirm("エディタに編集内容が残っています。\n新規作成すると削除されますがよろしいですか?")){
 			so.modal.custom(langmenu);
@@ -308,6 +328,7 @@ function changeLang(l,v){
 		myCodeMirror.setOption("mode" , l);
 		if(v == "sv"){viewMode(1);}
 		else if(v == "dv"){viewMode(0);}
+		else if(v == "mdv"){viewMode(3);}
 		cMenu();
 }
 function showConfig(){
@@ -385,7 +406,12 @@ function changeTab(num){
 		view();
 	}else if(changetablang == "htmlmixed"){
 		changeLang("htmlmixed","dv");
+		sessionStorage.dualview = "dv";
 		view();
+	}else if(changetablang == "markdown"){
+		changeLang("markdown","mdv");
+		sessionStorage.dualview = "mdv";
+		view();	
 	}
 	else{
 		changeLang(changetablang,"sv");
