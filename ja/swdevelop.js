@@ -156,7 +156,7 @@ function menu(num){
 		document.getElementById("lang" + changelang).style.background = "#138200";
 	}
 	else if(num==4){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'About\',\'<b>Soruto Web Develop</b><br><span style=font-size:10pt>Webブラウザで使えるソースコードエディタ<br>Made with  CodeMirror.<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop2/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'Soruto Web Develop\',\'<span style=font-size:10pt>Webブラウザで使えるソースコードエディタ<br>Made with  CodeMirror.<br>MDの表示には、marked.jsを使用しています<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop2/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 }
 function sMenu(){
