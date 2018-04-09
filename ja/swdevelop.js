@@ -48,6 +48,10 @@ iframe.contentDocument.designMode = 'on';
 */
 //設定の適用
 try{
+//Check Web Storage API
+if(!storageAvailable("localStorage")||!storageAvailable("sessionStorage")){
+	showInfo("大変申し訳ありませんが、このブラウザでは、<br>本アプリは使用できません。他のブラウザでお試しください。","#fff","#f24343");
+}else{
 var config = localStorage.swdConfig.split(',');
 	if(config[0] == "true"){autowrapdata = true;}
 	else{autowrapdata=false;}
@@ -55,6 +59,7 @@ myCodeMirror.setOption("lineWrapping",autowrapdata);
 var editorMain = document.getElementsByClassName('CodeMirror')[0];
 editorMain.style.fontFamily = config[1];
 editorMain.style.fontSize = config[2] + "pt";
+}
 }catch(e){localStorage.swdConfig = "false,,11"}
 
 document.getElementById("submenu").style.display = "none";
@@ -76,6 +81,30 @@ window.onresize = function () {
 window.onbeforeunload = function(e) {
       return 'このページから出ると、すべてのタブの編集内容が失われますが、続行しますか?';
     };
+//Web Storage APIが使用可能か確認(MDNからコピペ)
+function storageAvailable(type) {
+	try {
+		var storage = window[type],
+			x = '__storage_test__';
+		storage.setItem(x, x);
+		storage.removeItem(x);
+		return true;
+	}
+    catch(e) {
+        return e instanceof DOMException && (
+            // everything except Firefox
+            e.code === 22 ||
+            // Firefox
+            e.code === 1014 ||
+            // test name field too, because code might not be present
+            // everything except Firefox
+            e.name === 'QuotaExceededError' ||
+            // Firefox
+            e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
+            // acknowledge QuotaExceededError only if there's something already stored
+            storage.length !== 0;
+    }
+}
 function view(){
 	myCodeMirror.save();
 	var code = so.getVal("code");
