@@ -5,7 +5,7 @@
 */
 
 //バージョンを定義
-var version = "3.01";
+var version = "3.02";
 
 var mixedMode = {
         name: "htmlmixed",
@@ -283,6 +283,8 @@ fo.addEventListener("change",function(evt){
 	var empty = findEmptyTab();
 	if(empty == 0){
 		if(!window.confirm("空のタブがないため、現在のタブでファイルを開きます。\n続行すると現在のタブのデータが削除されますがよろしいですか")){
+			so.modal.close();
+			so.getId("so-modal").style.cursor="default";
 			return false;
 		}
 	}else{
@@ -512,7 +514,7 @@ function setTemplate(url){
 	if (xhr.readyState === 4 && xhr.status === 200){
 		var empty = findEmptyTab();
 		if(empty == 0){
-		 if(!window.confirm("空のタブがないため、現在のタブでファイルを開きます。\n続行すると現在のタブのデータが削除されますがよろしいですか")){
+		 if(!window.confirm("空のタブがないため、現在のタブにテンプレートを転送します。\n続行すると現在のタブのデータが削除されますがよろしいですか")){
 			return false;
 		}
 	}else{
