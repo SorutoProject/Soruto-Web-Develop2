@@ -509,7 +509,15 @@ function setTemplate(url){
   xhr.open('GET', "../template/" + url ,true);
   xhr.onreadystatechange = function(){
     // 本番用
-    if (xhr.readyState === 4 && xhr.status === 200){
+	if (xhr.readyState === 4 && xhr.status === 200){
+		var empty = findEmptyTab();
+		if(empty == 0){
+		 if(!window.confirm("空のタブがないため、現在のタブでファイルを開きます。\n続行すると現在のタブのデータが削除されますがよろしいですか")){
+			return false;
+		}
+	}else{
+		changeTab(empty);
+	}
       var data = xhr.responseText;
 	  myCodeMirror.setValue(data);
 	  so.modal.close();
@@ -517,6 +525,14 @@ function setTemplate(url){
     }
     // ローカルファイル用
     if (xhr.readyState === 4 && xhr.status === 0){
+			var empty = findEmptyTab();
+		if(empty == 0){
+		 if(!window.confirm("空のタブがないため、現在のタブでファイルを開きます。\n続行すると現在のタブのデータが削除されますがよろしいですか")){
+			return false;
+		}
+	}else{
+		changeTab(empty);
+	}
       var data = xhr.responseText;
 	  myCodeMirror.setValue(data);
 	  so.modal.close();
