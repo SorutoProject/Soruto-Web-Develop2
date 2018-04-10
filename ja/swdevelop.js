@@ -1,4 +1,13 @@
-﻿var mixedMode = {
+﻿/*Soruto Web Develop Main Source(JP)
+* Ver.3.00
+* License:MIT
+* (C)2018 Soruto Project
+*/
+
+//バージョンを定義
+var version = "3.00";
+
+var mixedMode = {
         name: "htmlmixed",
         scriptTypes: [{matches: /\/x-handlebars-template|\/x-mustache/i,
                        mode: null},
@@ -186,7 +195,7 @@ function menu(num){
 		document.getElementById("lang" + changelang).style.background = "#138200";
 	}
 	else if(num==4){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'Soruto Web Develop\',\'<span style=font-size:10pt>Webブラウザで使えるソースコードエディタ<br>Made with  CodeMirror.<br>MDの表示には、marked.jsを使用しています<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop2/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'Soruto Web Develop\',\'<span style=font-size:10pt>Webブラウザで使えるソースコードエディタ<br>Made with  CodeMirror and marked.js.<br>Ver.&nbsp;'+version+'<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop2/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 }
 function sMenu(){
@@ -394,7 +403,7 @@ function saveConfig(){
 	showInfo("設定を保存して適用しました","#fefefe","#00af0b");
 }
 function showStartCenter(){
-	var startmenu = '<b>SWD</b> スタートセンター<br><span style="font-size:8pt;background:#202020;color:#fefefe;">Webブラウザで使えるソースコードエディタ&nbsp;</span><a href="javascript:void(0)" onclick="so.modal.close();newFile()" class="submenulink">新規作成</a><a href="javascript:void(0)" onclick="so.modal.close();fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0)" onclick="so.modal.close();loadLocal();" class="submenulink" >LocalStorageから読み込む</a><a href="javascript:void(0)" onclick="so.modal.close();template();" class="submenulink" >テンプレートから作成</a><a href="javascript:void(0)" onclick="so.modal.close();showConfig()" class="submenulink" style="border-bottom:#a5a5a5 3px solid;">設定を開く</a><a href="javascript:void(0)" onclick="so.modal.close();" class="submenulink">スタートセンターを閉じる</a>';
+	var startmenu = '<b>SWD</b> スタートセンター<span style="font-size:8pt;">&nbsp;Ver.' + version + '</span><br><span style="font-size:8pt;background:#202020;color:#fefefe;">Webブラウザで使えるソースコードエディタ&nbsp;</span><a href="javascript:void(0)" onclick="so.modal.close();newFile()" class="submenulink">新規作成</a><a href="javascript:void(0)" onclick="so.modal.close();fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0)" onclick="so.modal.close();loadLocal();" class="submenulink" >LocalStorageから読み込む</a><a href="javascript:void(0)" onclick="so.modal.close();template();" class="submenulink" >テンプレートから作成</a><a href="javascript:void(0)" onclick="so.modal.close();showConfig()" class="submenulink" style="border-bottom:#a5a5a5 3px solid;">設定を開く</a><a href="javascript:void(0)" onclick="so.modal.close();" class="submenulink">スタートセンターを閉じる</a>';
 
 	so.modal.custom(startmenu);
 }
