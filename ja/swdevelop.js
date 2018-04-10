@@ -1,11 +1,11 @@
 ﻿/*Soruto Web Develop Main Source(JP)
-* Ver.3.00
+* Ver.3.01
 * License:MIT
 * (C)2018 Soruto Project
 */
 
 //バージョンを定義
-var version = "3.00";
+var version = "3.01";
 
 var mixedMode = {
         name: "htmlmixed",
@@ -28,6 +28,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"),{
 });
 myCodeMirror.on("keyup", function (cm, event) {
         view();
+		fileChanged();
     });
 myCodeMirror.on("mousedown", function (cm, event) {
         cMenu();
@@ -134,6 +135,14 @@ function view(){
 		}
 	}
 }
+function fileChanged(){
+	var nowtabnum = sessionStorage.nowtab;
+	var nowtabelem = document.getElementById("swdtab" + nowtabnum);
+	if(nowtabelem.textContent.indexOf("*") == -1){
+	//タブのファイル名に*をつける
+	nowtabelem.innerHTML = nowtabelem.textContent + "*";
+	}
+}
 function viewMode(num){
 	if(num==0){
 		sessionStorage.dualview = "dv";
@@ -179,7 +188,9 @@ function menu(num){
 	if(num==0){
 		sub.innerHTML='<a href="javascript:void(0);" onclick="newFile();" class="submenulink">新規作成</a><input type="text" id="filename" style="width:295px;background:#4c4c4c;color:#fefefe;" placeholder="ファイル名..." autocomplete="off" onkeyup="savefilename();"><br><a href="javascript:void(0);" onclick="fileDown();" class="submenulink">ダウンロード</a><a href="javascript:void(0);" onclick="fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0);" onclick="saveLocal();" class="submenulink">ブラウザ(LocalStorage)に保存</a><a href="javascript:void(0);" onclick="loadLocal();" class="submenulink">ブラウザ(LocalStorage)から読み込み</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 		var nowtab = sessionStorage.nowtab;
-		var filename = document.getElementById("swdtab" + nowtab).textContent;
+		var userfilename = document.getElementById("swdtab" + nowtab).textContent;
+		//ファイルの変更を示す*を消す
+		var filename = userfilename.split("*")[0];
 		if(filename == "NEW"){}
 		else{document.getElementById("filename").value = filename;}
 	}
