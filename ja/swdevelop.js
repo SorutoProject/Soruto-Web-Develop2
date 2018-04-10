@@ -39,6 +39,7 @@ window.onload = function(){
 	}
 	so.display("view");
 	so.display("code");
+	myCodeMirror.setValue("");
 	view();
 	Screen();
 /*var iframe = document.querySelector('iframe');
@@ -244,7 +245,7 @@ document.getElementById("swdtab" + nowtabnum).innerHTML = name;
 }
 function fileOpen(){
 cMenu();
-var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。<br><b>※現在のタブで編集中の内容は削除されます</b></b></span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css,.php,.xml,.md"><br><br><input type="button" onclick="so.modal.close();" value="閉じる">';
+var diaso = '<b>ファイルを選択してください</b><br><span style="font-size:8pt;">※UTF-8でエンコードされていることを推奨します。</span><br><input type="file" id="selfile" accept=".html,.htm,.js,.css,.php,.xml,.md"><br><br><input type="button" onclick="so.modal.close();" value="閉じる">';
 so.modal.custom(diaso);
 var fo = document.getElementById("selfile");
 fo.addEventListener("change",function(evt){
@@ -259,6 +260,14 @@ fo.addEventListener("change",function(evt){
   //読込終了後の処理
   reader.onload = function(ev){
     //テキストエリアに表示する
+	var empty = findEmptyTab();
+	if(empty == 0){
+		if(!window.confirm("空のタブがないため、現在のタブでファイルを開きます。\n続行すると現在のタブのデータが削除されますがよろしいですか")){
+			return false;
+		}
+	}else{
+		changeTab(empty);
+	}
     myCodeMirror.setValue(reader.result);
 	var fname = file[0].name;
 	var fnamelower = fname.toLowerCase();
