@@ -482,7 +482,8 @@ function changeTab(num){
 	}	
 sessionStorage.nowtab = num;
 myCodeMirror.clearHistory();
-document.title = document.getElementById("swdtab" + num).textContent + " - Soruto Web Develop";
+document.title = document.getElementById("swdtab" + num).textContent.split("*")[0] + " - Soruto Web Develop";
+myCodeMirror.focus();
 }
 function template(){
   //テンプレ選択画面のHTMLを取得
