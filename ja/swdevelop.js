@@ -297,25 +297,26 @@ function loadLocal(){
 function newFile(){
 	cMenu();
 	var langmenu = '使用する言語を選択<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\');so.modal.close();myCodeMirror.focus();" class="submenulink">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\');so.modal.close();myCodeMirror.focus();" class="submenulink">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\');so.modal.close();myCodeMirror.focus();" class="submenulink">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\');so.modal.close();myCodeMirror.focus();" class="submenulink">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\');so.modal.close();" class="submenulink">XML</a><a href="javascript:void(0);" onclick="changeLang(\'markdown\',\'mdv\');so.modal.close();" class="submenulink">MarkDown(MD)</a>';
-	if(myCodeMirror.getValue()!=""){
-		if(confirm("エディタに編集内容が残っています。\n新規作成すると削除されますがよろしいですか?")){
-			so.modal.custom(langmenu);
-			myCodeMirror.setValue("");
-			document.title="New - Soruto Web Develop";
-			view();
-			var now = sessionStorage.nowtab;
-			document.getElementById("swdtab" + now).innerHTML = "NEW";
-		}
-	}else{
+	var emptytab = findEmptyTab();
+	if(emptytab == 0){
+		if(window.confirm("空のタブがないため、現在のタブで新規作成します。\n続行すると現在のタブのデータが削除されますがよろしいですか?")){
 		so.modal.custom(langmenu);
 		myCodeMirror.setValue("");
 		document.title="New - Soruto Web Develop";
 		view();
 		var now = sessionStorage.nowtab;
 		document.getElementById("swdtab" + now).innerHTML = "NEW";
+		}
+	}else{
+	changeTab(emptytab);
+	so.modal.custom(langmenu);
+	myCodeMirror.setValue("");
+	document.title="New - Soruto Web Develop";
+	view();
+	var now = sessionStorage.nowtab;
+	document.getElementById("swdtab" + now).innerHTML = "NEW";
 	}
 }
-
 function cMenu(){
 	document.getElementById("submenu").style.display = "none";
 }
@@ -494,3 +495,19 @@ function setTemplate(url){
   };
   xhr.send(null);
 };
+function findEmptyTab(){
+	var list = new Array(10);
+	list[0] = so.getId("swdtab1").textContent;
+	list[1] = so.getId("swdtab2").textContent;
+	list[2] = so.getId("swdtab3").textContent;
+	list[3] = so.getId("swdtab4").textContent;
+	list[4] = so.getId("swdtab5").textContent;
+	list[5] = so.getId("swdtab6").textContent;
+	list[6] = so.getId("swdtab7").textContent;
+	list[7] = so.getId("swdtab8").textContent;
+	list[8] = so.getId("swdtab9").textContent;
+	list[9] = so.getId("swdtab10").textContent;
+	var firstFind = list.indexOf('NEW');
+	var emptytabnum = firstFind + 1;
+	return emptytabnum;
+}
