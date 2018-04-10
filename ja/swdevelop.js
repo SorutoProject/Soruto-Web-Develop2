@@ -1,5 +1,5 @@
-﻿/*Soruto Web Develop Main Source(JP)
-* Ver.3.01
+/*Soruto Web Develop Main Source(JP)
+* Ver.3.02
 * License:MIT
 * (C)2018 Soruto Project
 */
