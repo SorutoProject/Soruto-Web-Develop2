@@ -67,7 +67,7 @@ body {
  width:100%;
  border-bottom:#a5a5a5 1px solid;
  cursor:default;
- height:20px;
+ height:20px
 }
 .submenulink:hover {
  color:#fefefe;
@@ -170,7 +170,8 @@ input[type=text]:hover,input[type=text]:focus,input[type=button]:hover,input[typ
  background:#4c4c4c;
  border:#fefefe 1px solid;
  cursor:default;
- white-space:nowrap
+ overflow:hidden;
+ white-space: :nowrap;
 }
 .tabelem:hover {
  background:#2c2c2c
@@ -186,5 +187,6 @@ input[type=text]:hover,input[type=text]:focus,input[type=button]:hover,input[typ
  border-left:#fefefe 1px solid;
  border-right:#fefefe 1px solid;
  cursor:default;
- white-space:nowrap
+ white-space:nowrap;
+  overflow: hidden;
 }
