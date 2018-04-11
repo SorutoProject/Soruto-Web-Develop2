@@ -1,4 +1,4 @@
-/*Soruto Web Develop Main Source(JP)
+﻿/*Soruto Web Develop Main Source(JP)
 * Ver.3.02
 * License:MIT
 * (C)2018 Soruto Project
@@ -186,7 +186,7 @@ function menu(num){
 	var sub = document.getElementById("submenu");
 	//メニュー設定(class="submenulink"を指定したaタグはwidth:100%なので、<br>不要)
 	if(num==0){
-		sub.innerHTML='<a href="javascript:void(0);" onclick="newFile();" class="submenulink">新規作成</a><input type="text" id="filename" style="width:295px;background:#4c4c4c;color:#fefefe;" placeholder="ファイル名..." autocomplete="off" onkeyup="savefilename();"><br><a href="javascript:void(0);" onclick="fileDown();" class="submenulink">ダウンロード</a><a href="javascript:void(0);" onclick="fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0);" onclick="saveLocal();" class="submenulink">ブラウザ(LocalStorage)に保存</a><a href="javascript:void(0);" onclick="loadLocal();" class="submenulink">ブラウザ(LocalStorage)から読み込み</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+		sub.innerHTML='<a href="javascript:void(0);" onclick="newFile();" class="submenulink">新規作成</a><input type="text" id="filename" style="width:295px;background:#4c4c4c;color:#fefefe;" placeholder="ファイル名..." autocomplete="off" onkeyup="savefilename();"><br><a href="javascript:void(0);" onclick="fileDown();" class="submenulink">ダウンロード</a><a href="javascript:void(0);" onclick="fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0);" onclick="saveLocal();" class="submenulink">ブラウザ(LocalStorage)に保存</a><a href="javascript:void(0);" onclick="loadLocal();" class="submenulink">ブラウザ(LocalStorage)から読み込み</a><a href="javascript:void(0);" onclick="tabClose();" class="submenulink">ファイルを閉じる</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 		var nowtab = sessionStorage.nowtab;
 		var userfilename = document.getElementById("swdtab" + nowtab).textContent;
 		//ファイルの変更を示す*を消す
@@ -558,4 +558,20 @@ function findEmptyTab(){
 	var firstFind = list.indexOf('NEW');
 	var emptytabnum = firstFind + 1;
 	return emptytabnum;
+}
+function tabClose(){
+	cMenu();
+	var nowtab = sessionStorage.nowtab;
+	var filename = document.getElementById("swdtab" + nowtab).textContent;
+	if(filename.indexOf("*") > -1){
+		if(!window.confirm('現在開いているファイル "' + filename + '" を閉じようとしています。\nこのファイルは変更されています。ファイルを閉じると編集内容が削除されます。\n続行しますか?')){
+			return false;
+		}
+	}
+document.getElementById("swdtab" + nowtab).innerHTML = "NEW";
+sessionStorage.setItem('swdsavetab' + nowtab , "");
+sessionStorage.setItem('swdsavetablang' + nowtab , "htmlmixed");
+changeLang("htmlmixed","dv");
+myCodeMirror.setValue("");
+view();
 }

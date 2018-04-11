@@ -170,8 +170,8 @@ input[type=text]:hover,input[type=text]:focus,input[type=button]:hover,input[typ
  background:#4c4c4c;
  border:#fefefe 1px solid;
  cursor:default;
- overflow:hidden;
- white-space: :nowrap;
+ white-space:nowrap;
+  overflow: hidden;
 }
 .tabelem:hover {
  background:#2c2c2c
