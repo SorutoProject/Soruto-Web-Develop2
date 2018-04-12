@@ -18,12 +18,7 @@ var browserLanguage = function() {
 window.onload = function(){
 // 日本語
 if( browserLanguage() == 'ja' ){
-  var userAgent = window.navigator.userAgent.toLowerCase();
-  if(userAgent.indexOf('trident') != -1){
-     location.replace('/old/');
-  }else{
   location.replace('/ja/');
-}
 }
 // その他
 else{
