@@ -564,7 +564,7 @@ function tabClose(){
 	var nowtab = sessionStorage.nowtab;
 	var filename = document.getElementById("swdtab" + nowtab).textContent;
 	if(filename.indexOf("*") > -1){
-		if(!window.confirm('you wanna to the current file "' + filename + '" \nbut this file was edited.\nIf you continue this function,you lost this file edited. \nAre you sure to continue?')){
+		if(!window.confirm('you wanna close the current file "' + filename + '" \nbut this file was edited.\nIf you continue this function,you lost this file edited. \nAre you sure to continue?')){
 			return false;
 		}
 	}
