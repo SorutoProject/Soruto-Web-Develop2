@@ -4,7 +4,7 @@
 */
 
 //バージョンを定義
-var version = "3.06";
+var version = "3.10";
 
 var mixedMode = {
         name: "htmlmixed",
