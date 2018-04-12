@@ -1,11 +1,10 @@
 ﻿/*Soruto Web Develop Main Source(JP)
-* Ver.3.02
 * License:MIT
 * (C)2018 Soruto Project
 */
 
 //バージョンを定義
-var version = "3.05";
+var version = "3.06";
 
 var mixedMode = {
         name: "htmlmixed",
@@ -85,6 +84,7 @@ setTimeout(function(){
     document.getElementById("loader").style.display = "none"; 
   }, 500);
 document.title = "NEW - Soruto Web Develop";
+document.getElementById("swdtab1").innerHTML = "NEW";
 }
 window.onresize = function () {
     Screen();
@@ -447,6 +447,7 @@ function changeTab(num){
 	var now = so.getVal("code");//編集中のタブのテキストを取得
 	var nowlang = myCodeMirror.getOption("mode");//言語モードを取得
 	var nownum = sessionStorage.nowtab;
+	var nowfilename = document.getElementById("swdtab" + nownum).textContent;//現在のタブのファイル名を取得
 	sessionStorage.setItem('swdsavetab' + nownum , now);
 	sessionStorage.setItem('swdsavetablang' + nownum , nowlang);
 	var changetabdata = sessionStorage.getItem('swdsavetab' + num);
@@ -485,6 +486,10 @@ function changeTab(num){
 sessionStorage.nowtab = num;
 myCodeMirror.clearHistory();
 document.title = document.getElementById("swdtab" + num).textContent.split("*")[0] + " - Soruto Web Develop";
+//移動前のタブが編集済みでないときの処理(changeイベントによる*の追加を抑制)
+if(nowfilename.indexOf("*")== -1){
+	document.getElementById("swdtab" + nownum).innerHTML = document.getElementById("swdtab" + nownum).textContent.split("*")[0];
+}
 myCodeMirror.focus();
 }
 function template(){
