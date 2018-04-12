@@ -186,6 +186,7 @@ function menu(num){
 	var sub = document.getElementById("submenu");
 	//メニュー設定(class="submenulink"を指定したaタグはwidth:100%なので、<br>不要)
 	if(num==0){
+		//ファイル
 		sub.innerHTML='<a href="javascript:void(0);" onclick="newFile();" class="submenulink">新規作成</a><input type="text" id="filename" style="width:295px;background:#4c4c4c;color:#fefefe;" placeholder="ファイル名..." autocomplete="off" onkeyup="savefilename();"><br><a href="javascript:void(0);" onclick="fileDown();" class="submenulink">ダウンロード</a><a href="javascript:void(0);" onclick="fileOpen();" class="submenulink">ファイルを開く</a><a href="javascript:void(0);" onclick="saveLocal();" class="submenulink">ブラウザ(LocalStorage)に保存</a><a href="javascript:void(0);" onclick="loadLocal();" class="submenulink">ブラウザ(LocalStorage)から読み込み</a><a href="javascript:void(0);" onclick="tabClose();" class="submenulink">ファイルを閉じる</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 		var nowtab = sessionStorage.nowtab;
 		var userfilename = document.getElementById("swdtab" + nowtab).textContent;
@@ -195,18 +196,25 @@ function menu(num){
 		else{document.getElementById("filename").value = filename;}
 	}
 	else if(num==1){
+		//+
 		sub.innerHTML='<a href="javascript:void(0)" onclick="newtab(0)" class="submenulink">新しいウィンドウを開く</a><a href="javascript:void(0)" onclick="newtab(1)" class="submenulink">新しいウィンドウでファイルを開く</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==2){
+		//表示
 		sub.innerHTML='<a href="javascript:void(0);" onclick="viewMode(0);cMenu();" class="submenulink">デュアルビューモード</a><a href="javascript:void(0);" onclick="viewMode(3);cMenu();" class="submenulink">マークダウン表示モード</a><a href="javascript:void(0);" onclick="viewMode(1);cMenu();" class="submenulink">ソース表示モード</a><a href="javascript:void(0);" onclick="viewMode(2);cMenu();" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示モード</a><a href="javascript:void(0)" onclick="pageview(\'reload\');" class="submenulink">ページ表示を更新</a><a href="javascript:void(0)" onclick="pageview(\'reset\');" class="submenulink" style="border-bottom:#fefefe 2px solid;">ページ表示をリセット(エラーが出たとき)</a><a href="javascript:void(0)" class="submenulink" onclick="showStartCenter();cMenu();">スタートセンターを開く</a><a href="javascript:void(0)" class="submenulink" onclick="showConfig();"><b>設定を開く</b></a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 	}
 	else if(num==3){
+		//言語
 		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink" id="langhtmlmixed">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink" id="langjavascript">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink" id="langcss">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink" id="langphp">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\')" class="submenulink" id="langxml">XML</a><a href="javascript:void(0);" onclick="changeLang(\'markdown\',\'mdv\')" class="submenulink" id="langmarkdown">MarkDown(MD)</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
 		var changelang = myCodeMirror.getOption("mode");
 		document.getElementById("lang" + changelang).style.background = "#138200";
 	}
 	else if(num==4){
+		//About
 		sub.innerHTML='<a href="javascript:void(0);" onclick="so.modal.al(\'Soruto Web Develop\',\'<span style=font-size:10pt>Webブラウザで使えるソースコードエディタ<br>Made with  CodeMirror and marked.js.<br>Ver.&nbsp;'+version+'<br>(c)2018 Soruto Project</span>\');cMenu();" class="submenulink">このサイトについて</a><a href="https://github.com/SorutoProject/Soruto-Web-Develop2/" target="_blank" class="submenulink">GitHub</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(メニューを閉じる)</a>';
+	}
+	else if(num==5){
+		sub.innerHTML='<span style="color:#fefefe"><b>Web検索</b></span><br><input type="text" placeholder="検索ワードを入力" style="width:295px;background:#4c4c4c;color:#fefefe;" id="searchword"><br><a href="javascript:void(0);" class="submenulink" onclick="webSearch(\'https://developer.mozilla.org/ja/search?q=\')">MDNで検索</a><a href="javascript:void(0);" class="submenulink" onclick="webSearch(\'https://google.co.jp/search?q=\')">Googleで検索</a>';
 	}
 }
 function sMenu(){
@@ -579,4 +587,13 @@ changeLang("htmlmixed","dv");
 myCodeMirror.setValue("");
 view();
 document.getElementById("swdtab" + nowtab).innerHTML = "NEW";
+}
+function webSearch(surl){
+	var word = document.getElementById("searchword").value;
+	if(word == ""){
+		showInfo("検索ワードを入力してください","#fefefe","#f24343");
+	}else{
+	window.open(surl + word,"_blank");
+	cMenu();
+	}
 }
