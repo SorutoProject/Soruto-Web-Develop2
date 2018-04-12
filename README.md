@@ -1,6 +1,8 @@
 # Soruto-Web-Develop2
 Soruto Web Develop の新バージョンです。  
 
+[今すぐ試す](http://swdevelop.cf)
+
 ### バージョン1からの変更点
 本バージョンでは、以前まで使用していたACE Editorから乗り換え、 
 CodeMirrorを使用しています。  
