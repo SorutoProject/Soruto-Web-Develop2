@@ -1,7 +1,33 @@
-<html>
-  <head>
-    <script>
-    location.replace('/ja/')
-    </script>
-  </head>
-</html>
+<!DOCTYPE HTML><html><head><title>Soruto Web Develop</title><meta charset="utf-8"><script>
+var browserLanguage = function() {
+  var ua = window.navigator.userAgent.toLowerCase();
+  try {
+    // chrome
+    if( ua.indexOf( 'chrome' ) != -1 ){
+      return ( navigator.languages[0] || navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2);
+    }
+    // それ以外
+    else{
+      return ( navigator.browserLanguage || navigator.language || navigator.userLanguage).substr(0,2);
+    }
+  }
+  catch( e ) {
+    return undefined;
+  }
+}
+window.onload = function(){
+// 日本語
+if( browserLanguage() == 'ja' ){
+  var userAgent = window.navigator.userAgent.toLowerCase();
+  if(userAgent.indexOf('trident') != -1){
+     location.replace('/old/');
+  }else{
+  location.replace('/ja/');
+}
+}
+// その他
+else{
+  location.replace('/en/');
+}
+}
+</script></head></html>
