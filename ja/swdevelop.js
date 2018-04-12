@@ -5,7 +5,7 @@
 */
 
 //バージョンを定義
-var version = "3.02";
+var version = "3.05";
 
 var mixedMode = {
         name: "htmlmixed",
@@ -26,7 +26,7 @@ var myCodeMirror = CodeMirror.fromTextArea(document.getElementById("code"),{
     }
 
 });
-myCodeMirror.on("keyup", function (cm, event) {
+myCodeMirror.on("change", function (cm, event) {
         view();
 		fileChanged();
     });
@@ -295,7 +295,6 @@ fo.addEventListener("change",function(evt){
 	var fnamelower = fname.toLowerCase();
 	document.title = fname + " - Soruto Web Develop";
 	var nowtabnum = sessionStorage.getItem("nowtab");
-	document.getElementById("swdtab" + nowtabnum).innerHTML = fname;
 	if(fnamelower.lastIndexOf('.js')!=-1){changeLang('javascript','sv');var lang = "JavaScript";}
 	else if(fnamelower.lastIndexOf('.htm')!=-1){changeLang('htmlmixed','dv');var lang = "HTML";}
 	else if(fnamelower.lastIndexOf('.css')!=-1){changeLang('css','sv');var lang = "CSS";}
@@ -307,6 +306,7 @@ fo.addEventListener("change",function(evt){
 	view();
 	showInfo("ファイルを開きました<br>ファイル名:" + fname + "<br>ファイルタイプ:" + lang,"#fefefe","#00af0b");
 	myCodeMirror.focus();
+	document.getElementById("swdtab" + nowtabnum).innerHTML = fname;
   }
 },false);
 }
@@ -568,10 +568,10 @@ function tabClose(){
 			return false;
 		}
 	}
-document.getElementById("swdtab" + nowtab).innerHTML = "NEW";
 sessionStorage.setItem('swdsavetab' + nowtab , "");
 sessionStorage.setItem('swdsavetablang' + nowtab , "htmlmixed");
 changeLang("htmlmixed","dv");
 myCodeMirror.setValue("");
 view();
+document.getElementById("swdtab" + nowtab).innerHTML = "NEW";
 }
