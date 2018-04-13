@@ -350,7 +350,7 @@ function newFile(){
 	changeTab(emptytab);
 	so.modal.custom(langmenu);
 	myCodeMirror.setValue("");
-	document.title="New - Soruto Web Develop";
+	document.title="NEW - Soruto Web Develop";
 	view();
 	var now = sessionStorage.nowtab;
 	document.getElementById("swdtab" + now).innerHTML = "NEW";
