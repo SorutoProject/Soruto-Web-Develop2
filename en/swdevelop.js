@@ -4,7 +4,7 @@
 */
 
 //Version
-var version = "3.10";
+var version = "3.20";
 
 var mixedMode = {
         name: "htmlmixed",
@@ -332,7 +332,7 @@ function newFile(){
 		if(window.confirm("Make new file in the current tab because there is no blank tab.\nIf you continue this function,you lost the data in current tab.\nAre you sure to continue?")){
 		so.modal.custom(langmenu);
 		myCodeMirror.setValue("");
-		document.title="New - Soruto Web Develop";
+		document.title="NEW - Soruto Web Develop";
 		view();
 		var now = sessionStorage.nowtab;
 		document.getElementById("swdtab" + now).innerHTML = "NEW";
@@ -574,6 +574,7 @@ changeLang("htmlmixed","dv");
 myCodeMirror.setValue("");
 view();
 document.getElementById("swdtab" + nowtab).innerHTML = "NEW";
+document.title = "NEW - Soruto Web Develop";
 }
 function webSearch(surl){
 	var word = document.getElementById("searchword").value;
