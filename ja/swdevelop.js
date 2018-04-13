@@ -4,7 +4,7 @@
 */
 
 //バージョンを定義
-var version = "3.10";
+var version = "3.20";
 
 var mixedMode = {
         name: "htmlmixed",
@@ -341,7 +341,7 @@ function newFile(){
 		if(window.confirm("空のタブがないため、現在のタブで新規作成します。\n続行すると現在のタブのデータが削除されますがよろしいですか?")){
 		so.modal.custom(langmenu);
 		myCodeMirror.setValue("");
-		document.title="New - Soruto Web Develop";
+		document.title="NEW - Soruto Web Develop";
 		view();
 		var now = sessionStorage.nowtab;
 		document.getElementById("swdtab" + now).innerHTML = "NEW";
@@ -587,6 +587,7 @@ changeLang("htmlmixed","dv");
 myCodeMirror.setValue("");
 view();
 document.getElementById("swdtab" + nowtab).innerHTML = "NEW";
+document.title = "NEW - Soruto Web Develop";
 }
 function webSearch(surl){
 	var word = document.getElementById("searchword").value;
