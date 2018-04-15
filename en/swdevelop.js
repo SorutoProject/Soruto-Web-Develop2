@@ -4,7 +4,7 @@
 */
 
 //Version
-var version = "3.21";
+var version = "3.211";
 
 var mixedMode = {
         name: "htmlmixed",
@@ -204,7 +204,7 @@ function menu(num){
 		//Language
 		sub.innerHTML='<a href="javascript:void(0);" onclick="changeLang(\'htmlmixed\',\'dv\')" class="submenulink" id="langhtmlmixed">HTML</a><a href="javascript:void(0);" onclick="changeLang(\'javascript\',\'sv\')" class="submenulink" id="langjavascript">JavaScript</a><a href="javascript:void(0);" onclick="changeLang(\'css\',\'sv\')" class="submenulink" id="langcss">CSS</a><a href="javascript:void(0);" onclick="changeLang(\'php\',\'sv\')" class="submenulink" id="langphp">PHP</a><a href="javascript:void(0);" onclick="changeLang(\'xml\',\'sv\')" class="submenulink" id="langxml">XML</a><a href="javascript:void(0);" onclick="changeLang(\'markdown\',\'mdv\')" class="submenulink" id="langmarkdown">MarkDown(MD)</a><a href="javascript:void(0);" class="submenulink" onclick="cMenu();">(Close this menu)</a>';
 		var changelang = myCodeMirror.getOption("mode");
-		document.getElementById("lang" + changelang).style.background = "#138200";
+		document.getElementById("lang" + changelang).style.background = "#2c2c2c";
 	}
 	else if(num==4){
 		//About
