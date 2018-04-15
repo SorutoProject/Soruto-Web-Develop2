@@ -4,7 +4,7 @@
 */
 
 //Version
-var version = "3.20";
+var version = "3.21";
 
 var mixedMode = {
         name: "htmlmixed",
@@ -338,7 +338,7 @@ function newFile(){
 		document.getElementById("swdtab" + now).innerHTML = "NEW";
 		}
 	}else{
-	changeTab(emptytab);
+	changeTab(emptytab,"blur");
 	so.modal.custom(langmenu);
 	myCodeMirror.setValue("");
 	document.title="NEW - Soruto Web Develop";
@@ -440,7 +440,7 @@ function closeInfo(){
 	document.getElementById("info").style.display = "none"; 
 }
 
-function changeTab(num){
+function changeTab(num,option){
 	cMenu();
 	myCodeMirror.save();
 	var now = so.getVal("code");//get the current tab text
@@ -488,7 +488,9 @@ document.title = document.getElementById("swdtab" + num).textContent.split("*")[
 if(nowfilename.indexOf("*")== -1){
 	document.getElementById("swdtab" + nownum).innerHTML = document.getElementById("swdtab" + nownum).textContent.split("*")[0];
 }
+if(option != "blur"){
 myCodeMirror.focus();
+}
 }
 function template(){
 	//Load the Templates Menu
